@@ -11,3 +11,13 @@ logging:
   level:
     org.springframework.web: ERROR
     com.bfwg: DEBUG
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:hsqldb:hsql://localhost:9001/xdb
+    username: SA
+    password: password
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver

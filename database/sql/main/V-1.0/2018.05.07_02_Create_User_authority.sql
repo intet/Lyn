@@ -1,0 +1,10 @@
+--liquibase formatted sql
+--changeset Sivodedov Dmitry:create_table_user_authority
+CREATE TABLE USER_AUTHORITY
+(
+  USER_ID      BIGINT NOT NULL,
+  AUTHORITY_ID BIGINT NOT NULL,
+  CONSTRAINT FK_UA_USER_ID FOREIGN KEY (USER_ID) REFERENCES PRINCIPAL (ID),
+  CONSTRAINT FF_UA_AUTHORITY_ID FOREIGN KEY (AUTHORITY_ID) REFERENCES AUTHORITY (ID)
+)
+--rollback drop table user_authority;

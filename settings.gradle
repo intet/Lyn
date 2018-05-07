@@ -1,6 +1,20 @@
 rootProject.name = 'Lyn'
 
+//Lib
+gradle.ext.hsqldbVersion = '2.3.2'
+
+//default database config
+gradle.ext.dbName = "xdb"
+gradle.ext.dbFile = "dev/database/devDB"
+gradle.ext.dbUser = "SA"
+gradle.ext.dbPassword = "password"
+gradle.ext.dbPort = 9001
+gradle.ext.dbHost = "localhost"
+gradle.ext.dbUrl = "jdbc:hsqldb:hsql://${gradle.dbHost}:${gradle.dbPort}/${gradle.dbName}"
+gradle.ext.dbDrive = "org.hsqldb.jdbc.JDBCDriver"
+
 include ':backend'
 include ':frontend'
+include ':database'
 project(':backend').projectDir = "$rootDir/backend" as File
 project(':frontend').projectDir = "$rootDir/frontend" as File

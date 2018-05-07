@@ -1,0 +1,56 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath group: 'org.hsqldb', name: 'hsqldb', version: gradle.hsqldbVersion
+    }
+}
+plugins {
+    id "org.liquibase.gradle" version "1.2.4"
+}
+def dbUser = project.properties['dbUser'] ?: gradle.dbUser
+def dbPassword = project.properties['dbPassword'] ?: gradle.dbPassword
+def dbUrl = project.properties['dbUrl'] ?: gradle.dbUrl
+
+
+group 'com.intetm'
+version '1.0-SNAPSHOT'
+
+apply from: 'database.gradle'
+
+
+liquibase {
+    activities {
+        //noinspection GroovyAssignabilityCheck
+        main {
+            changeLogFile 'sql/main/changelog.xml'
+            url dbUrl
+            username dbUser
+            password dbPassword
+        }
+        dev {
+            changeLogFile 'sql/dev/changelog.xml'
+            url dbUrl
+            username dbUser
+            password dbPassword
+        }
+    }
+}
+task updateDbMain(dependsOn: startDatabase) {
+    group = 'develop'
+    doLast {
+        liquibase.runList = 'main'
+        tasks.update.execute()
+    }
+}
+
+task updateDbDev(dependsOn: startDatabase) {
+    group = 'develop'
+    doLast {
+        liquibase.runList = 'main, dev'
+        tasks.update.execute()
+    }
+}

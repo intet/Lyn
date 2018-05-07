@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 
 @Entity
-@Table(name = "USER")
+@Table(name = "PRINCIPAL")
 public class User implements UserDetails, Serializable {
   @Id
   @Column(name = "id")
