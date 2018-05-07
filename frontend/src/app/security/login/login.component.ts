@@ -1,16 +1,9 @@
-import { Inject } from '@angular/core';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DisplayMessage } from '../shared/models/display-message';
-import { Subscription } from 'rxjs/Subscription';
-import {
-  UserService,
-  AuthService
-} from '../service';
-
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/SUbject';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DisplayMessage} from '../../shared/models/display-message';
+import {AuthService, UserService} from '../service';
+import {Subject} from 'rxjs/SUbject';
 
 @Component({
   selector: 'app-login',

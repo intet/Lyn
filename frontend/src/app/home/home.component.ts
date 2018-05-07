@@ -1,9 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FooService,
-  ConfigService,
-  UserService
-} from '../service';
+import {Component, OnInit} from '@angular/core';
+import {ConfigService, FooService, UserService} from '../security/service';
 
 @Component({
   selector: 'app-home',

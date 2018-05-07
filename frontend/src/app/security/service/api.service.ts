@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders, HttpResponse, HttpRequest, HttpEventType, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import {HttpClient, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import 'rxjs/add/observable/throw';
-import { serialize } from 'app/shared/utilities/serialize';
+import {serialize} from 'app/shared/utilities/serialize';
 
 export enum RequestMethod {
   Get = 'GET',

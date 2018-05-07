@@ -1,16 +1,14 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home';
-import { LoginComponent } from './login';
-import { AdminComponent } from './admin';
-import { LoginGuard } from './guard';
-import { GuestGuard, AdminGuard } from './guard';
-import { NotFoundComponent } from './not-found';
-import { ChangePasswordComponent } from './change-password';
-import { ForbiddenComponent } from './forbidden';
-import { SignupComponent } from './signup';
- 
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './home';
+import {LoginComponent} from './security/login';
+import {AdminComponent} from './admin';
+import {AdminGuard, GuestGuard, LoginGuard} from './security/guard';
+import {NotFoundComponent} from './security/not-found';
+import {ChangePasswordComponent} from './security/change-password';
+import {ForbiddenComponent} from './security/forbidden';
+import {SignupComponent} from './security/signup';
+
 export const routes: Routes = [
   {
     path: '',

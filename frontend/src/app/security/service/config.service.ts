@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class ConfigService {
@@ -23,7 +22,7 @@ export class ConfigService {
   private _reset_credentials_url = this._user_url + '/reset-credentials';
 
   private _foo_url = this._api_url + '/foo';
-  
+
   private _signup_url = this._api_url + '/signup';
 
   get reset_credentials_url(): string {

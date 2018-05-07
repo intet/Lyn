@@ -1,10 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {
-  ConfigService,
-  AuthService,
-  UserService
-} from '../../../service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AuthService, ConfigService, UserService} from '../../../security/service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-account-menu',
