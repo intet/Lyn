@@ -12,7 +12,6 @@ import {Subject} from 'rxjs/Subject';
 })
 export class SignupComponent implements OnInit, OnDestroy {
   title = 'Sign up';
-  githubLink = 'https://github.com/bfwg/angular-spring-starter';
   form: FormGroup;
 
   /**
@@ -63,7 +62,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   repository() {
-    window.location.href = this.githubLink;
+    //window.location.href = this.githubLink;
   }
 
   onSubmit() {

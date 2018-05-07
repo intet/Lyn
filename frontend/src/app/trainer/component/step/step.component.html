@@ -1,0 +1,11 @@
+<div class="container col-4" [ngClass]="{swing: invalid}">
+  <form class="align-self-center table-bordered ">
+    <h1 class="text-center">Test word</h1>
+    <p class="text-center">{{word.original}}</p>
+    <div class="form-group">
+      <input class="col-md-12 media-heading" [(ngModel)]="input" name="input" required type="text"
+             (keypress)="onEnter($event)"/>
+    </div>
+    <p>{{input}}</p>
+  </form>
+</div>

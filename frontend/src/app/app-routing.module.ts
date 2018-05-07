@@ -8,6 +8,7 @@ import {NotFoundComponent} from './security/not-found';
 import {ChangePasswordComponent} from './security/change-password';
 import {ForbiddenComponent} from './security/forbidden';
 import {SignupComponent} from './security/signup';
+import {WordStepComponent} from "./trainer/component/step/step.component";
 
 export const routes: Routes = [
   {
@@ -43,6 +44,10 @@ export const routes: Routes = [
   {
     path: '403',
     component: ForbiddenComponent
+  },
+  {
+    path: 'word',
+    component: WordStepComponent
   },
   {
     path: '**',

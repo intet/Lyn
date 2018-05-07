@@ -3,13 +3,12 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
-import {SecurityModule} from './security/security.module'
+import {SecurityModule} from './../security/security.module'
 // material
 import {
   MatButtonModule,
   MatCardModule,
   MatIconModule,
-  MatIconRegistry,
   MatInputModule,
   MatMenuModule,
   MatProgressSpinnerModule,
@@ -18,22 +17,11 @@ import {
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {AppComponent} from './app.component';
-import {AppRoutingModule} from './app-routing.module';
-import {HomeComponent} from './home';
-import {AccountMenuComponent} from './component/header/account-menu/account-menu.component';
-import {ApiCardComponent, HeaderComponent} from './component';
-import {AdminComponent} from "./admin/admin.component";
-import {TrainerModuleModule} from "./trainer/trainer.module";
+import {WordStepComponent} from "./component/step/step.component";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    ApiCardComponent,
-    HomeComponent,
-    AccountMenuComponent,
-    AdminComponent
+    WordStepComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -42,7 +30,6 @@ import {TrainerModuleModule} from "./trainer/trainer.module";
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
-    AppRoutingModule,
     MatMenuModule,
     MatTooltipModule,
     MatButtonModule,
@@ -52,12 +39,8 @@ import {TrainerModuleModule} from "./trainer/trainer.module";
     MatCardModule,
     MatProgressSpinnerModule,
     FlexLayoutModule,
-    SecurityModule,
-    TrainerModuleModule
-  ],
-  providers: [
-    MatIconRegistry,
-  ],
-  bootstrap: [AppComponent]
+    SecurityModule
+  ]
 })
-export class AppModule { }
+export class TrainerModuleModule {
+}
