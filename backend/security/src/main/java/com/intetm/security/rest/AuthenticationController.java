@@ -1,8 +1,8 @@
-package com.intetm.rest;
+package com.intetm.security.rest;
 
-import com.intetm.model.UserTokenState;
 import com.intetm.security.TokenHelper;
-import com.intetm.service.impl.CustomUserDetailsService;
+import com.intetm.security.model.UserTokenState;
+import com.intetm.security.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;

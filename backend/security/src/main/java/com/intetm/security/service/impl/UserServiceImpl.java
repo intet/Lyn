@@ -1,11 +1,11 @@
-package com.intetm.service.impl;
+package com.intetm.security.service.impl;
 
 import com.intetm.model.Authority;
 import com.intetm.model.User;
-import com.intetm.model.UserRequest;
 import com.intetm.repository.UserRepository;
-import com.intetm.service.AuthorityService;
-import com.intetm.service.UserService;
+import com.intetm.security.model.UserRequest;
+import com.intetm.security.service.AuthorityService;
+import com.intetm.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;

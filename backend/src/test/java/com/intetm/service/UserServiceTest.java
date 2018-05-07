@@ -1,6 +1,7 @@
 package com.intetm.service;
 
 import com.intetm.AbstractTest;
+import com.intetm.security.service.UserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;

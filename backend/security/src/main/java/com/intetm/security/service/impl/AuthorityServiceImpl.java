@@ -1,8 +1,8 @@
-package com.intetm.service.impl;
+package com.intetm.security.service.impl;
 
 import com.intetm.model.Authority;
 import com.intetm.repository.AuthorityRepository;
-import com.intetm.service.AuthorityService;
+import com.intetm.security.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

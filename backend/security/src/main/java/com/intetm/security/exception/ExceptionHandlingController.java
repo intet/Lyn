@@ -1,4 +1,4 @@
-package com.intetm.exception;
+package com.intetm.security.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

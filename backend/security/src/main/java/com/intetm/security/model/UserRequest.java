@@ -1,4 +1,4 @@
-package com.intetm.model;
+package com.intetm.security.model;
 
 
 public class UserRequest {

@@ -1,7 +1,7 @@
-package com.intetm.service;
+package com.intetm.security.service;
 
 import com.intetm.model.User;
-import com.intetm.model.UserRequest;
+import com.intetm.security.model.UserRequest;
 
 import java.util.List;
 

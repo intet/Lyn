@@ -1,4 +1,4 @@
-package com.intetm.exception;
+package com.intetm.security.exception;
 
 public class ResourceConflictException extends RuntimeException {
   /**

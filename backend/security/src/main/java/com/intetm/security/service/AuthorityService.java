@@ -1,4 +1,4 @@
-package com.intetm.service;
+package com.intetm.security.service;
 
 import com.intetm.model.Authority;
 

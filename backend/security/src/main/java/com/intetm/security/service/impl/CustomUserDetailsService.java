@@ -1,4 +1,4 @@
-package com.intetm.service.impl;
+package com.intetm.security.service.impl;
 
 import com.intetm.model.User;
 import com.intetm.repository.UserRepository;

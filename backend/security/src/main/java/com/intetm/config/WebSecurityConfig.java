@@ -1,7 +1,7 @@
 package com.intetm.config;
 
 import com.intetm.security.auth.*;
-import com.intetm.service.impl.CustomUserDetailsService;
+import com.intetm.security.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

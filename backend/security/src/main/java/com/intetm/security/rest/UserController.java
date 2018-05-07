@@ -1,9 +1,9 @@
-package com.intetm.rest;
+package com.intetm.security.rest;
 
-import com.intetm.exception.ResourceConflictException;
 import com.intetm.model.User;
-import com.intetm.model.UserRequest;
-import com.intetm.service.UserService;
+import com.intetm.security.exception.ResourceConflictException;
+import com.intetm.security.model.UserRequest;
+import com.intetm.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
