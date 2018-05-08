@@ -18,12 +18,18 @@ include ':frontend'
 include ':database'
 include ':backend:security'
 include ':backend:storage'
+include ':backend:trainer'
+include ':backend:util'
 
 project(':backend').projectDir = "$rootDir/backend" as File
 project(':frontend').projectDir = "$rootDir/frontend" as File
 project(':backend:security').projectDir = "$rootDir/backend/security" as File
 project(':backend:storage').projectDir = "$rootDir/backend/storage" as File
+project(':backend:trainer').projectDir = "$rootDir/backend/trainer" as File
+project(':backend:util').projectDir = "$rootDir/backend/util" as File
 
 
 findProject(':backend:security')?.name = 'security'
 findProject(':backend:storage')?.name = 'storage'
+findProject(':backend:trainer')?.name = 'trainer'
+findProject(':backend:util')?.name = 'util'

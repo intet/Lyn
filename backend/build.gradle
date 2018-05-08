@@ -13,6 +13,7 @@ repositories {
 dependencies {
     compile project(':backend:storage')
     compile project(':backend:security')
+    compile project(':backend:trainer')
 
 
     runtime group: 'org.springframework.boot', name: 'spring-boot-devtools', version:'1.5.9.RELEASE'

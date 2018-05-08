@@ -1,0 +1,8 @@
+group 'com.intetm'
+version '0.1'
+
+dependencies {
+    compile project(':backend:storage')
+    compile project(':backend:util')
+
+}
