@@ -1,29 +1,16 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
-import {HttpClientModule} from '@angular/common/http';
 import {SecurityModule} from './security/security.module'
 // material
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatIconModule,
-  MatIconRegistry,
-  MatInputModule,
-  MatMenuModule,
-  MatProgressSpinnerModule,
-  MatToolbarModule,
-  MatTooltipModule
-} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatIconRegistry, MatPaginatorIntl} from '@angular/material';
 import {AppComponent} from './app.component';
-import {AppRoutingModule} from './app-routing.module';
 import {HomeComponent} from './home';
 import {AccountMenuComponent} from './component/header/account-menu/account-menu.component';
 import {ApiCardComponent, HeaderComponent} from './component';
 import {AdminComponent} from "./admin/admin.component";
 import {TrainerModuleModule} from "./trainer/trainer.module";
+import {UtilModule} from "./util/util.module";
+import {getRussianPaginatorIntl} from "./util/russian-paginator-intl";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -35,26 +22,15 @@ import {TrainerModuleModule} from "./trainer/trainer.module";
     AdminComponent
   ],
   imports: [
-    BrowserAnimationsModule,
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
-    HttpClientModule,
-    AppRoutingModule,
-    MatMenuModule,
-    MatTooltipModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatProgressSpinnerModule,
+    UtilModule,
     SecurityModule,
-    TrainerModuleModule
+    TrainerModuleModule,
+    AppRoutingModule,
   ],
   providers: [
     MatIconRegistry,
+    {provide: MatPaginatorIntl, useValue: getRussianPaginatorIntl()}
+
   ],
   bootstrap: [AppComponent]
 })

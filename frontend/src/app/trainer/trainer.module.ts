@@ -1,43 +1,21 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
-import {HttpClientModule} from '@angular/common/http';
 import {SecurityModule} from './../security/security.module'
 // material
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatIconModule,
-  MatInputModule,
-  MatMenuModule,
-  MatProgressSpinnerModule,
-  MatToolbarModule,
-  MatTooltipModule
-} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {WordStepComponent} from "./component/step/step.component";
+import {WordGridComponent} from "./component/grid/word/grid.word.component";
+import {WordService} from "./service/word.service";
+import {UtilModule} from "../util/util.module";
 
 @NgModule({
   declarations: [
-    WordStepComponent
+    WordStepComponent, WordGridComponent
+  ],
+  providers: [
+    WordService
   ],
   imports: [
-    BrowserAnimationsModule,
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
-    HttpClientModule,
-    MatMenuModule,
-    MatTooltipModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatProgressSpinnerModule,
-    SecurityModule
+    UtilModule,
+    SecurityModule,
   ]
 })
 export class TrainerModuleModule {

@@ -52,7 +52,7 @@ export class ApiService {
   }
 
   private request(path: string, body: any, method = RequestMethod.Post, custemHeaders?: HttpHeaders): Observable<any> {
-    const req = new HttpRequest(method, path, body, {
+    const req = new HttpRequest(method.toString(), path, body, {
       headers: custemHeaders || this.headers,
       withCredentials: true
     });

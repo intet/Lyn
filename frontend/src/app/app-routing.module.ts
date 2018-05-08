@@ -9,6 +9,7 @@ import {ChangePasswordComponent} from './security/change-password';
 import {ForbiddenComponent} from './security/forbidden';
 import {SignupComponent} from './security/signup';
 import {WordStepComponent} from "./trainer/component/step/step.component";
+import {WordGridComponent} from "./trainer/component/grid/word/grid.word.component";
 
 export const routes: Routes = [
   {
@@ -48,6 +49,10 @@ export const routes: Routes = [
   {
     path: 'word',
     component: WordStepComponent
+  },
+  {
+    path: 'grid',
+    component: WordGridComponent
   },
   {
     path: '**',
