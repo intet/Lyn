@@ -1,5 +1,8 @@
 package com.intetm.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -28,6 +31,7 @@ public class Dictionary {
     public Language languageTo;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "word_link_dictionary",
             joinColumns = @JoinColumn(name = "dictionary_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "link_id", referencedColumnName = "id"))
