@@ -17,7 +17,6 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HomeComponent} from './home';
@@ -51,7 +50,6 @@ import {TrainerModuleModule} from "./trainer/trainer.module";
     MatToolbarModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    FlexLayoutModule,
     SecurityModule,
     TrainerModuleModule
   ],

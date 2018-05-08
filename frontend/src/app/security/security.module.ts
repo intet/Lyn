@@ -7,6 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {
   MatButtonModule,
   MatCardModule,
+  MatFormFieldModule,
   MatIconModule,
   MatIconRegistry,
   MatInputModule,
@@ -16,7 +17,6 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {LoginComponent} from './login';
 import {AdminGuard, GuestGuard, LoginGuard} from './guard';
 import {NotFoundComponent} from './not-found';
@@ -52,8 +52,8 @@ export function initUserFactory(userService: UserService) {
     MatInputModule,
     MatToolbarModule,
     MatCardModule,
-    MatProgressSpinnerModule,
-    FlexLayoutModule
+    MatFormFieldModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     LoginGuard,

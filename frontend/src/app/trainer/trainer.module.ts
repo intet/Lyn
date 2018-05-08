@@ -16,7 +16,6 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {WordStepComponent} from "./component/step/step.component";
 
 @NgModule({
@@ -38,7 +37,6 @@ import {WordStepComponent} from "./component/step/step.component";
     MatToolbarModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    FlexLayoutModule,
     SecurityModule
   ]
 })
