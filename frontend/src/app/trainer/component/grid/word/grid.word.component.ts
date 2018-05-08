@@ -27,6 +27,7 @@ export class WordGridComponent implements OnInit {
   }
 
   ngOnInit() {
+    //this.dataSource.paginator = this.paginator;
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
