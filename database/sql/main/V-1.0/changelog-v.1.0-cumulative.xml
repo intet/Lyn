@@ -9,5 +9,6 @@
     </changeSet>
     <include file="sql/main/V-1.0/2018.05.07_01_Create_User_table.sql"/>
     <include file="sql/main/V-1.0/2018.05.07_02_Create_User_authority.sql"/>
+    <include file="sql/main/V-1.0/2018.05.08_03_Create_word.sql"/>
 
 </databaseChangeLog>
