@@ -8,7 +8,7 @@ import {of as observableOf} from 'rxjs/observable/of';
 import {catchError} from 'rxjs/operators/catchError';
 import {WordService} from "../../../service/word.service";
 import {ResponsePagingWrapper} from "../../../../util/entity";
-import {Word} from "../../../service/word";
+import {WordLink} from "../../../service/entity/word";
 
 @Component({
   selector: 'grid-word',
@@ -17,7 +17,7 @@ import {Word} from "../../../service/word";
 })
 export class WordGridComponent implements OnInit {
   displayedColumns = ['id', 'original', 'translation'];
-  dataSource = new MatTableDataSource();
+    dataSource = new MatTableDataSource<WordLink>();
   totalCount = 0;
   isLoadingResults = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,7 +40,7 @@ export class WordGridComponent implements OnInit {
             this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize);
         }),
         map(data => {
-          let items: ResponsePagingWrapper<Word> = data;
+            let items: ResponsePagingWrapper<WordLink> = data;
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.totalCount = items.total;
