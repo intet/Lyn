@@ -11,8 +11,8 @@ export class WordAddComponent implements OnInit {
     to: Row[];
 
     constructor(private wordService: WordService) {
-        this.from = [];
-        this.to = [];
+        this.from = [new Row('test'), new Row('test2')];
+        this.to = [new Row('test4')];
     }
 
     ngOnInit() {
