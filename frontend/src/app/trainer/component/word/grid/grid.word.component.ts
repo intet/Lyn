@@ -11,7 +11,7 @@ import {ResponsePagingWrapper} from "../../../../util/entity";
 import {WordLink} from "../../../service/entity/word";
 
 @Component({
-    selector: 'grid-word',
+    selector: 'word-grid',
     templateUrl: './grid.word.component.html',
     styleUrls: ['./grid.word.component.css']
 })

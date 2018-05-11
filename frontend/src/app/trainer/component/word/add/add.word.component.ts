@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {WordService} from "../../../service/word.service";
+import {Component, Inject, OnInit} from "@angular/core";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 
 @Component({
     selector: 'add-word',
@@ -10,9 +10,18 @@ export class WordAddComponent implements OnInit {
     from: Row[];
     to: Row[];
 
-    constructor(private wordService: WordService) {
+    constructor(public dialogRef: MatDialogRef<WordAddComponent>,
+                @Inject(MAT_DIALOG_DATA) public data: any) {
         this.from = [new Row('')];
         this.to = [new Row('')];
+    }
+
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
+
+    onLaunchClick(): void {
+        let params: any = {};
     }
 
     ngOnInit() {
