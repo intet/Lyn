@@ -11,8 +11,8 @@ export class WordAddComponent implements OnInit {
     to: Row[];
 
     constructor(private wordService: WordService) {
-        this.from = [new Row('test'), new Row('test2')];
-        this.to = [new Row('test4')];
+        this.from = [new Row('')];
+        this.to = [new Row('')];
     }
 
     ngOnInit() {
@@ -20,11 +20,16 @@ export class WordAddComponent implements OnInit {
     }
 
     addFrom() {
-        this.from.push();
+        this.afterChange(this.from);
     }
 
     addTo() {
-        this.to.push();
+        this.afterChange(this.to);
+    }
+
+    private afterChange(arr: Row[]) {
+        if (arr[arr.length - 1].text !== '')
+            arr.push(new Row(''));
     }
 }
 

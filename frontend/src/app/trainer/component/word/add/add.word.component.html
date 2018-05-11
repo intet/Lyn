@@ -1,17 +1,21 @@
 <mat-card>
     <mat-card-title>Запись слова</mat-card-title>
     <div class="row">
-        <div class="col-6" *ngFor="let word of from; let isLast=last">
-            <mat-form-field>
-                <input matInput [(ngModel)]="word.text">
-            </mat-form-field>
-            <br/>
+        <div class="col-6">
+            <div *ngFor="let word of from; let isLast=last">
+                <mat-form-field>
+                    <input matInput [(ngModel)]="word.text" (change)="addFrom()">
+                </mat-form-field>
+                <br *ngIf="!isLast"/>
+            </div>
         </div>
-        <div class="col-6" *ngFor="let word of to; let isLast=last">
-            <mat-form-field>
-                <input matInput [(ngModel)]="word.text">
-            </mat-form-field>
-            <br/>
+        <div class="col-6">
+            <div *ngFor="let word of to; let isLast=last">
+                <mat-form-field>
+                    <input matInput [(ngModel)]="word.text" (change)="addTo()">
+                </mat-form-field>
+                <br *ngIf="!isLast"/>
+            </div>
         </div>
     </div>
 </mat-card>
