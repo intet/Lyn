@@ -1,0 +1,15 @@
+<div>
+    <mat-card class="col-md-6">
+        <mat-card-title>Запись слова</mat-card-title>
+        <div class="example-container">
+            <mat-form-field *ngFor="let word of from">
+                <input matInput [(ngModel)]="word.text">
+            </mat-form-field>
+        </div>
+        <div class="example-container">
+            <mat-form-field *ngFor="let word of to">
+                <input matInput [(ngModel)]="word.text">
+            </mat-form-field>
+        </div>
+    </mat-card>
+</div>
