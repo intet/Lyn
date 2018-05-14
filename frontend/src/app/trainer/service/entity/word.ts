@@ -2,11 +2,13 @@ export class WordLink {
     id: Number;
     from: Word[];
     to: Word[];
+    internalId: Number;
 
     constructor(form: Word[], to: Word[]) {
         this.id = null;
         this.from = form;
         this.to = to;
+        this.internalId = -new Date().getTime();
     }
 }
 

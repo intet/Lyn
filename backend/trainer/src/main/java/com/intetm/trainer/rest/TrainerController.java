@@ -1,11 +1,13 @@
 package com.intetm.trainer.rest;
 
 import com.intetm.model.Dictionary;
+import com.intetm.trainer.rest.wrapper.LinkRequest;
 import com.intetm.trainer.service.DictionaryService;
 import com.intetm.util.entity.ResponsePagingWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -43,4 +45,8 @@ public class TrainerController {
     return new ResponseEntity<User>(user, HttpStatus.CREATED);*/
     }
 
+    @RequestMapping(method = POST, value = "/saveLinks")
+    public void saveLinks(@RequestBody LinkRequest[] linkRequests) {
+        System.out.print(linkRequests.length);
+    }
 }
