@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-api-card',
@@ -21,7 +21,6 @@ export class ApiCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.responseObj);
   }
 
   onButtonClick() {

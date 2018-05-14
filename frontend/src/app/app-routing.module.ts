@@ -9,7 +9,8 @@ import {ChangePasswordComponent} from './security/change-password';
 import {ForbiddenComponent} from './security/forbidden';
 import {SignupComponent} from './security/signup';
 import {WordStepComponent} from "./trainer/component/step/step.component";
-import {WordGridComponent} from "./trainer/component/grid/word/grid.word.component";
+import {WordAddComponent} from "./trainer/component/word/add/add.word.component";
+import {DictionaryComponent} from "./trainer/component/word/dictionary/dictionary.component";
 
 export const routes: Routes = [
   {
@@ -52,12 +53,16 @@ export const routes: Routes = [
   },
   {
     path: 'grid',
-    component: WordGridComponent
+      component: DictionaryComponent
   },
   {
-    path: '**',
-    redirectTo: '/404'
-  }
+      path: 'add',
+      component: WordAddComponent
+  },
+    {
+        path: '**',
+        redirectTo: '/404'
+    }
 ];
 
 @NgModule({

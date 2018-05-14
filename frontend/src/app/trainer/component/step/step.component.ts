@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {Word} from "../../service/word";
+import {Word, WordLink} from "../../service/entity/word";
 
 @Component({
   selector: 'step-word',
@@ -7,7 +7,7 @@ import {Word} from "../../service/word";
   styleUrls: ['./step.component.css']
 })
 export class WordStepComponent implements OnInit {
-  word: Word;
+    word: WordLink;
   input: String;
   invalid: boolean;
 
@@ -16,7 +16,7 @@ export class WordStepComponent implements OnInit {
 
   ngOnInit() {
     //this.wordService.initNewTest();
-    this.word = new Word('1', 'world', 'мир');
+      this.word = new WordLink([new Word('test')], [new Word('test')]);
     this.invalid = false;
   }
 
