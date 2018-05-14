@@ -33,34 +33,18 @@ export class WordService {
     addWordLink(from: string[], to: string[]) {
         let fromWords: Word[] = [];
         let toWords: Word[] = [];
-        for (let text of from) {
-            if (!text)
-                continue;
-            text = text.trim();
-            if (text.length == 0)
-                continue;
+        from.forEach(text => {
+            let word = this.getWord(text);
+            if (word != null)
+                fromWords.push(word);
+        });
+        
+        to.forEach(text => {
+            let word = this.getWord(text);
+            if (word != null)
+                toWords.push(word);
+        });
 
-            let word = this.dictionary.wordMap.get(text);
-            if (word == null) {
-                word = new Word(text);
-                this.dictionary.wordMap.set(text, word);
-            }
-            fromWords.push(word);
-        }
-        for (let text of to) {
-            if (!text)
-                continue;
-            text = text.trim();
-            if (text.length == 0)
-                continue;
-
-            let word = this.dictionary.wordMap.get(text);
-            if (word == null) {
-                word = new Word(text);
-                this.dictionary.wordMap.set(text, word);
-            }
-            toWords.push(word);
-        }
         this.dictionary.wordLinks.push(new WordLink(fromWords, toWords));
         this.wordLinksChange.next();
     }
@@ -71,5 +55,21 @@ export class WordService {
         link.from.forEach(ref => from.push(ref.text));
         link.to.forEach(ref => to.push(ref.text));
         this.addWordLink(from, to);
+    }
+
+    getWord(text: string) {
+        if (!text)
+            return null;
+        text = text.trim();
+        if (text.length == 0)
+            return null;
+
+        let key = text.toLocaleLowerCase();
+        let word = this.dictionary.wordMap.get(key);
+        if (word == null) {
+            word = new Word(text);
+            this.dictionary.wordMap.set(key, word);
+        }
+        return word;
     }
 }
