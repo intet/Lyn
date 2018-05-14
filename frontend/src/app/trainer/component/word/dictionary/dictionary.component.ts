@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {MatDialog} from "@angular/material";
-import {WordAddComponent} from "../add/add.word.component";
+import {RowLink, WordAddComponent} from "../add/add.word.component";
+import {WordService} from "../../../service/word.service";
 
 @Component({
     selector: 'dictionary',
@@ -8,7 +9,7 @@ import {WordAddComponent} from "../add/add.word.component";
     styleUrls: ['./dictionary.component.css']
 })
 export class DictionaryComponent implements OnInit {
-    constructor(public dialog: MatDialog) {
+    constructor(public dialog: MatDialog, private wordService: WordService) {
     }
 
     ngOnInit() {
@@ -16,10 +17,12 @@ export class DictionaryComponent implements OnInit {
     }
 
     openDialog(): void {
+        let form = this;
         let dialogRef = this.dialog.open(WordAddComponent);
         dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
-            // this.animal = result;
+            if (result) {
+                form.wordService.createLink(result as RowLink);
+            }
         });
     }
 }

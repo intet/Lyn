@@ -7,21 +7,11 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
     styleUrls: ['./add.word.component.css']
 })
 export class WordAddComponent implements OnInit {
-    from: Row[];
-    to: Row[];
+    link: RowLink;
 
     constructor(public dialogRef: MatDialogRef<WordAddComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any) {
-        this.from = [new Row('')];
-        this.to = [new Row('')];
-    }
-
-    onNoClick(): void {
-        this.dialogRef.close();
-    }
-
-    onLaunchClick(): void {
-        let params: any = {};
+        this.link = new RowLink();
     }
 
     ngOnInit() {
@@ -29,11 +19,11 @@ export class WordAddComponent implements OnInit {
     }
 
     addFrom() {
-        this.afterChange(this.from);
+        this.afterChange(this.link.from);
     }
 
     addTo() {
-        this.afterChange(this.to);
+        this.afterChange(this.link.to);
     }
 
     private afterChange(arr: Row[]) {
@@ -42,7 +32,17 @@ export class WordAddComponent implements OnInit {
     }
 }
 
-class Row {
+export class RowLink {
+    from: Row[];
+    to: Row[];
+
+    constructor() {
+        this.from = [new Row('')];
+        this.to = [new Row('')];
+    }
+}
+
+export class Row {
     text: string = '';
 
     constructor(text?: string) {

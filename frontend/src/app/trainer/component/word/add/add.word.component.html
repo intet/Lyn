@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Запись слова</h1>
+<h1 mat-dialog-title>Добавление слова</h1>
 <div class="row">
     <div class="col-6">
         <mat-card-title>Слово</mat-card-title>
-        <div *ngFor="let word of from; let isLast=last">
+        <div *ngFor="let word of link.from; let isLast=last">
             <mat-form-field>
                 <input matInput [(ngModel)]="word.text" (change)="addFrom()">
             </mat-form-field>
@@ -11,7 +11,7 @@
     </div>
     <div class="col-6">
         <mat-card-title>Перевод</mat-card-title>
-        <div *ngFor="let word of to; let isLast=last">
+        <div *ngFor="let word of link.to; let isLast=last">
             <mat-form-field>
                 <input matInput [(ngModel)]="word.text" (change)="addTo()">
             </mat-form-field>
@@ -20,7 +20,6 @@
     </div>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="onLaunchClick()" cdkFocusInitial>Запустить</button>
-    <!--[mat-dialog-close]="data.animal"-->
-    <button mat-button (click)="onNoClick()">Нет</button>
+    <button mat-button [mat-dialog-close]="link" cdkFocusInitial>Добавить</button>
+    <button mat-button mat-dialog-close>Отмена</button>
 </div>
