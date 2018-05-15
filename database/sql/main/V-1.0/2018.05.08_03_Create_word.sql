@@ -3,10 +3,15 @@
 CREATE TABLE LANGUAGE
 (
   ID   BIGINT PRIMARY KEY NOT NULL IDENTITY,
-  CODE VARCHAR(255),
+  CODE VARCHAR_IGNORECASE(3),
   NAME VARCHAR(255)
 );
 --rollback drop table language;
+--changeset Sivodedov Dmitry:fill_table_language
+INSERT INTO LANGUAGE (ID, CODE, NAME)
+VALUES (1, 'RUS', 'Русский'), (2, 'ENG', 'English');
+--rollback delete from language;
+
 --changeset Sivodedov Dmitry:create_table_dictionary
 CREATE TABLE DICTIONARY
 (
