@@ -2,29 +2,39 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {Word, WordLink} from "./entity/word";
 import {ResponsePagingWrapper} from "../../util/entity";
-import {of as observableOf} from 'rxjs/observable/of';
 import {Dictionary} from "./entity/dictionary";
 import {RowLink} from "../component/word/add/add.word.component";
 import {Subject} from "rxjs/Subject";
 import {SyncApiService} from "./send/api.sync.service";
+import {DictionaryService} from "./dictionary.service";
 
 @Injectable({
     providedIn: 'root',
 })
 export class WordService {
-    private dictionary: Dictionary;
     public wordLinksChange = new Subject();
 
-    constructor(private sendService: SyncApiService) {
-        this.dictionary = new Dictionary(1, 'test');
-        this.addSimpleWordLink("world", "мир");
-        this.addSimpleWordLink("tree", "дерево");
-        this.addWordLink(["key"], ["источник", "ключ"]);
+    constructor(private sendService: SyncApiService, private dictionaryService: DictionaryService) {
+        /* this.dictionary = new Dictionary(1, 'test');
+         this.addSimpleWordLink("world", "мир");
+         this.addSimpleWordLink("tree", "дерево");
+         this.addWordLink(["key"], ["источник", "ключ"]);*/
     }
 
-    getWords(sort: string, order: string, page: number, pageSize: number): Observable<ResponsePagingWrapper<WordLink>> {
-        let result = new ResponsePagingWrapper(this.dictionary.wordLinks.length, this.dictionary.wordLinks);
-        return observableOf(result);
+    private static getWord(dictionary: Dictionary, text: string) {
+        if (!text)
+            return null;
+        text = text.trim();
+        if (text.length == 0)
+            return null;
+
+        let key = text.toLocaleLowerCase();
+        let word = dictionary.wordMap.get(key);
+        if (word == null) {
+            word = new Word(text);
+            dictionary.wordMap.set(key, word);
+        }
+        return word;
     }
 
     createLink(link: RowLink) {
@@ -40,40 +50,32 @@ export class WordService {
         this.addWordLink([from], [to]);
     }
 
-    private getWord(text: string) {
-        if (!text)
-            return null;
-        text = text.trim();
-        if (text.length == 0)
-            return null;
-
-        let key = text.toLocaleLowerCase();
-        let word = this.dictionary.wordMap.get(key);
-        if (word == null) {
-            word = new Word(text);
-            this.dictionary.wordMap.set(key, word);
-        }
-        return word;
+    getWords(sort: string, order: string, page: number, pageSize: number): Observable<ResponsePagingWrapper<WordLink>> {
+        return this.dictionaryService.getDictionary().map((dict) => {
+            return new ResponsePagingWrapper(dict.wordLinks.length, dict.wordLinks)
+        });
     }
 
     private addWordLink(from: string[], to: string[]) {
-        let fromWords: Word[] = [];
-        let toWords: Word[] = [];
-        from.forEach(text => {
-            let word = this.getWord(text);
-            if (word != null)
-                fromWords.push(word);
-        });
+        this.dictionaryService.getDictionary().subscribe(dictionary => {
+            let fromWords: Word[] = [];
+            let toWords: Word[] = [];
+            from.forEach(text => {
+                let word = WordService.getWord(dictionary, text);
+                if (word != null)
+                    fromWords.push(word);
+            });
 
-        to.forEach(text => {
-            let word = this.getWord(text);
-            if (word != null)
-                toWords.push(word);
+            to.forEach(text => {
+                let word = WordService.getWord(dictionary, text);
+                if (word != null)
+                    toWords.push(word);
+            });
+            let link = new WordLink(fromWords, toWords);
+            this.sendService.addLink(dictionary.id, link);
+            dictionary.wordLinks.push(link);
+            this.wordLinksChange.next();
         });
-        let link = new WordLink(fromWords, toWords);
-        this.sendService.addLink(this.dictionary.id, link);
-        this.dictionary.wordLinks.push(link);
-        this.wordLinksChange.next();
     }
 
 

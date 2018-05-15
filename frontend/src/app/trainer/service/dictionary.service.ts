@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs';
 import {of as observableOf} from 'rxjs/observable/of';
 import {Dictionary} from "./entity/dictionary";
 import {Subject} from "rxjs/Subject";
