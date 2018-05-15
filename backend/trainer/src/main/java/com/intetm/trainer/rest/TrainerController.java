@@ -3,6 +3,7 @@ package com.intetm.trainer.rest;
 import com.intetm.model.Dictionary;
 import com.intetm.trainer.rest.wrapper.LinkRequest;
 import com.intetm.trainer.service.DictionaryService;
+import com.intetm.trainer.service.SecurityService;
 import com.intetm.util.entity.EditMode;
 import com.intetm.util.entity.EditResult;
 import com.intetm.util.entity.ResponseEditWrapper;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Map;
+import java.util.Objects;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -29,6 +31,10 @@ public class TrainerController {
 
     @Autowired
     private DictionaryService dictionaryService;
+
+
+    @Autowired
+    private SecurityService securityService;
 /*
 
   @RequestMapping(method = GET, value = "/user/{userId}")
@@ -52,10 +58,16 @@ public class TrainerController {
     }
 
     @RequestMapping(method = POST, value = "/saveLinks")
-    public ResponseEditWrapper<Long> saveLinks(@RequestBody LinkRequest[] linkRequests) {
+    public ResponseEditWrapper<Long> saveLinks(@RequestBody LinkRequest[] linkRequests, UserDetails userDetails) {
         ResponseEditWrapper<Long> response = new ResponseEditWrapper<>();
+        Long dicId = null;
         for (LinkRequest linkRequest : linkRequests) {
             try {
+                if (!Objects.equals(dicId, linkRequest.dictionary)) {
+                    dicId = linkRequest.dictionary;
+                    if (!securityService.checkAccess(userDetails.getUsername(), dicId))
+                        break;
+                }
                 if (linkRequest.mode == EditMode.ADD || linkRequest.mode == EditMode.EDIT) {
                     Map<Long, EditResult<Long>> wordResult = dictionaryService.addLink(linkRequest);
                     response.putSuccess(linkRequest.transportId, linkRequest.id, wordResult);
