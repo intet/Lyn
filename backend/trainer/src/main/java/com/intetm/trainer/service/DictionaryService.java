@@ -1,5 +1,7 @@
 package com.intetm.trainer.service;
 
+import com.intetm.model.Dictionary;
+import com.intetm.repository.DictionaryRepository;
 import com.intetm.trainer.dao.WordDao;
 import com.intetm.trainer.rest.wrapper.LinkRequest;
 import com.intetm.trainer.rest.wrapper.WordRequest;
@@ -17,6 +19,9 @@ public class DictionaryService {
     @Autowired
     public WordDao wordDao;
 
+    @Autowired
+    public DictionaryRepository dictionaryRepository;
+
     public Map<Long, EditResult<Long>> addLink(LinkRequest linkRequest) {
         Map<Long, EditResult<Long>> wordResult = new HashMap<>();
         for (WordRequest word : linkRequest.from) {
@@ -30,5 +35,9 @@ public class DictionaryService {
 
         linkRequest.id = wordDao.saveLink(linkRequest);
         return wordResult;
+    }
+
+    public Dictionary getDefaultDictionary(String username) {
+        return dictionaryRepository.findByUserName(username).get(0);
     }
 }

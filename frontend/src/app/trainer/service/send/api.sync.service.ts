@@ -7,10 +7,9 @@ import {ApiService} from "../../../security/service/api.service";
 @Injectable({
     providedIn: 'root',
 })
-export class SendApiService {
+export class SyncApiService {
     private links: Map<Number, LinkRequest> = new Map();
     private timer;
-    private api_path = '/api/trainer';
 
     constructor(private api: ApiService) {
         this.timer = timer(10000, 10000);
@@ -24,7 +23,7 @@ export class SendApiService {
 
     onTime() {
         if (this.links.size == 0) return;
-        this.api.post(this.api_path + '/saveLinks', Array.from(this.links.values())).subscribe(
+        this.api.post(ApiService.api_path + '/saveLinks', Array.from(this.links.values())).subscribe(
             (t) => console.log("!!send !!")
         );
     }

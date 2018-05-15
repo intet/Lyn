@@ -19,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Map;
 import java.util.Objects;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
@@ -28,13 +29,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 @RequestMapping(value = "/api/trainer", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TrainerController {
+    private final DictionaryService dictionaryService;
+    private final SecurityService securityService;
 
     @Autowired
-    private DictionaryService dictionaryService;
-
-
-    @Autowired
-    private SecurityService securityService;
+    public TrainerController(DictionaryService dictionaryService, SecurityService securityService) {
+        this.dictionaryService = dictionaryService;
+        this.securityService = securityService;
+    }
 /*
 
   @RequestMapping(method = GET, value = "/user/{userId}")
@@ -77,5 +79,10 @@ public class TrainerController {
             }
         }
         return response;
+    }
+
+    @RequestMapping(method = GET, value = "/getDefaultDictionary")
+    public Dictionary getDefaultDictionary(UserDetails userDetails) {
+        return dictionaryService.getDefaultDictionary(userDetails.getUsername());
     }
 }
