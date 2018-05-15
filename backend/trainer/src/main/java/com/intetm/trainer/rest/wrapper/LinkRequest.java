@@ -1,12 +1,13 @@
 package com.intetm.trainer.rest.wrapper;
 
-public class LinkRequest {
-    public Integer mode;
-    public Long id;
-    public Long dictionary;
-    public Word[] from;
-    public Word[] to;
+import com.intetm.util.entity.EditMode;
 
+public class LinkRequest extends EntityRequest {
+    public EditMode mode;
+    public Long dictionary;
+    public WordRequest[] from;
+    public WordRequest[] to;
     public LinkRequest() {
+
     }
 }

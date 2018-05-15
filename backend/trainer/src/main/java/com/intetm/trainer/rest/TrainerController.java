@@ -3,6 +3,9 @@ package com.intetm.trainer.rest;
 import com.intetm.model.Dictionary;
 import com.intetm.trainer.rest.wrapper.LinkRequest;
 import com.intetm.trainer.service.DictionaryService;
+import com.intetm.util.entity.EditMode;
+import com.intetm.util.entity.EditResult;
+import com.intetm.util.entity.ResponseEditWrapper;
 import com.intetm.util.entity.ResponsePagingWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -33,8 +38,9 @@ public class TrainerController {
 
 
     @RequestMapping(method = POST, value = "/dictionary")
-    public ResponsePagingWrapper<Dictionary> addUser(UserDetails userDetails, UriComponentsBuilder ucBuilder) {
-        return dictionaryService.getAll(userDetails.getUsername());
+    public ResponsePagingWrapper<Dictionary> dictionary(UserDetails userDetails, UriComponentsBuilder ucBuilder) {
+        return null;
+        //   return dictionaryService.getAll(userDetails.getUsername());
 /*    User existUser = this.userService.findByUsername(userRequest.getUsername());
     if (existUser != null) {
       throw new ResourceConflictException(userRequest.getId(), "Username already exists");
@@ -46,7 +52,18 @@ public class TrainerController {
     }
 
     @RequestMapping(method = POST, value = "/saveLinks")
-    public void saveLinks(@RequestBody LinkRequest[] linkRequests) {
-        System.out.print(linkRequests.length);
+    public ResponseEditWrapper<Long> saveLinks(@RequestBody LinkRequest[] linkRequests) {
+        ResponseEditWrapper<Long> response = new ResponseEditWrapper<>();
+        for (LinkRequest linkRequest : linkRequests) {
+            try {
+                if (linkRequest.mode == EditMode.ADD || linkRequest.mode == EditMode.EDIT) {
+                    Map<Long, EditResult<Long>> wordResult = dictionaryService.addLink(linkRequest);
+                    response.putSuccess(linkRequest.transportId, linkRequest.id, wordResult);
+                }
+            } catch (Exception ex) {
+                response.putError(linkRequest.id, ex.getMessage());
+            }
+        }
+        return response;
     }
 }

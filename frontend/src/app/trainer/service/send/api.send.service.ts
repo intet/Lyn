@@ -18,7 +18,7 @@ export class SendApiService {
     }
 
     addLink(dictionary: Number, link: WordLink) {
-        let linkRequest = new LinkRequest(Mode.ADD, link.id, dictionary, link.from, link.to);
+        let linkRequest = new LinkRequest(Mode.ADD, link.id, link.internalId, dictionary, link.from, link.to);
         this.links.set(link.internalId, linkRequest);
     }
 
