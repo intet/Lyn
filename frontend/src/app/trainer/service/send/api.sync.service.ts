@@ -3,6 +3,7 @@ import {LinkRequest, Mode} from "./entity";
 import {WordLink} from "../entity/word";
 import {timer} from "rxjs/index";
 import {ApiService} from "../../../security/service/api.service";
+import {Dictionary} from "../entity/dictionary";
 
 @Injectable({
     providedIn: 'root',
@@ -16,8 +17,10 @@ export class SyncApiService {
         this.timer.subscribe((t) => this.onTime())
     }
 
-    addLink(dictionary: Number, link: WordLink) {
-        let linkRequest = new LinkRequest(Mode.ADD, link.id, link.internalId, dictionary, link.from, link.to);
+    addLink(dictionary: Dictionary, link: WordLink) {
+        link.from.forEach(l => l.language = dictionary.from.id);
+        link.to.forEach(l => l.language = dictionary.to.id);
+        let linkRequest = new LinkRequest(Mode.ADD, link.id, link.internalId, dictionary.id, link.from, link.to);
         this.links.set(link.internalId, linkRequest);
     }
 

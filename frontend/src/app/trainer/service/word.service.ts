@@ -81,7 +81,7 @@ export class WordService {
                     toWords.push(word);
             });
             let link = new WordLink(fromWords, toWords);
-            this.sendService.addLink(dictionary.id, link);
+            this.sendService.addLink(dictionary, link);
             dictionary.wordLinks.push(link);
             this.wordLinksChange.next();
         });

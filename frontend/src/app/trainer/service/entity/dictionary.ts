@@ -12,13 +12,16 @@ export class Dictionary {
     readonly wordLinks: WordLink[];
     sort: String;
     asc: boolean;
-    constructor(id, name) {
+
+    constructor(id, name, from: Language, to: Language) {
         this.id = id;
         this.name = name;
         this.wordMap = new Map();
         this.wordLinks = [];
         this.sort = 'id';
         this.asc = true;
+        this.from = from;
+        this.to = to;
     }
 
     sortLinks(sort: String, asc: boolean): Observable<Dictionary> {

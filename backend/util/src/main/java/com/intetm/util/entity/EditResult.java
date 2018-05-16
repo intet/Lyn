@@ -13,5 +13,6 @@ public class EditResult<T> {
 
     public EditResult(T id) {
         this.id = id;
+        this.success = true;
     }
 }

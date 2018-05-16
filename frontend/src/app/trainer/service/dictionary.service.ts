@@ -18,8 +18,8 @@ export class DictionaryService {
 
     loadDefault(): Observable<Dictionary> {
         return this.api.get(ApiService.api_path + '/getDefaultDictionary')
-            .map((result) => {
-                this.dictionary = result;
+            .map<any, Dictionary>((result) => {
+                this.dictionary = new Dictionary(result.id, result.name, result.languageFrom, result.languageTo);
                 return this.dictionary;
             });
     }

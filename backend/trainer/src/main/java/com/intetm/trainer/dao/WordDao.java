@@ -35,7 +35,7 @@ public class WordDao {
     public Long saveWord(Long dictionary, WordRequest request) {
         String text = request.text.trim();
         String lText = text.toLowerCase();
-        Word word = wordRepository.findByDictionaryAndLanguageAndLtext(dictionary, request.language, lText);
+        Word word = wordRepository.find(dictionary, request.language, lText);
         if (word != null) {
             if (word.text.equals(text)) {
                 return word.id;
