@@ -37,7 +37,7 @@ export class WordGridComponent implements OnInit {
                 switchMap(() => {
                     this.isLoadingResults = true;
                     return this.wordService!.getWords(
-                        this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize);
+                        this.sort.active, this.sort.direction != 'desc', this.paginator.pageIndex, this.paginator.pageSize);
                 }),
                 map(data => {
                     let items: ResponsePagingWrapper<WordLink> = data;

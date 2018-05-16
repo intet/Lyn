@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
-import {Observable} from 'rxjs';
 import {of as observableOf} from 'rxjs/observable/of';
 import {Dictionary} from "./entity/dictionary";
 import {Subject} from "rxjs/Subject";
 import {Output} from "@angular/compiler/src/core";
 import {ApiService} from "../../security/service/api.service";
+import {Observable} from "rxjs/Observable";
 
 @Injectable({
     providedIn: 'root',
