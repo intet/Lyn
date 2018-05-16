@@ -2,7 +2,7 @@ export class WordLink {
     id: number;
     from: Word[];
     to: Word[];
-    internalId: Number;
+    internalId: number;
     private static internalId = -1;
 
     constructor(form: Word[], to: Word[]) {

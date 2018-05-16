@@ -56,4 +56,8 @@ export class Dictionary {
             );
         }
     }
+
+    addWord(link: WordLink) {
+        this.wordLinks.push(link);
+    }
 }

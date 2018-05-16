@@ -54,11 +54,10 @@ export class WordService {
     getWords(sort: string, asc: boolean, page: number, pageSize: number): Observable<ResponsePagingWrapper<WordLink>> {
         return this.dictionaryService.getDictionary()
             .pipe<Dictionary, ResponsePagingWrapper<WordLink>>(
-                switchMap((d) => {
-                    let dict = d as Dictionary;
+                switchMap((dict: Dictionary) => {
                     return dict.sortLinks(sort, asc);
                 }),
-                map((d) => {
+                map((d: Dictionary) => {
                         return new ResponsePagingWrapper(d.wordLinks.length, d.wordLinks);
                     }
                 ))
@@ -66,7 +65,7 @@ export class WordService {
     }
 
     private addWordLink(from: string[], to: string[]) {
-        this.dictionaryService.getDictionary().subscribe(dictionary => {
+        this.dictionaryService.getDictionary().subscribe((dictionary: Dictionary) => {
             let fromWords: Word[] = [];
             let toWords: Word[] = [];
             from.forEach(text => {
@@ -82,7 +81,7 @@ export class WordService {
             });
             let link = new WordLink(fromWords, toWords);
             this.sendService.addLink(dictionary, link);
-            dictionary.wordLinks.push(link);
+            dictionary.addWord(link);
             this.wordLinksChange.next();
         });
     }

@@ -1,5 +1,5 @@
 export class Language {
-    readonly id: Number;
+    readonly id: number;
     readonly code: String;
     readonly name: String;
 
