@@ -7,7 +7,7 @@ import {RowLink} from "../component/word/add/add.word.component";
 import {Subject} from "rxjs/Subject";
 import {SyncApiService} from "./send/api.sync.service";
 import {DictionaryService} from "./dictionary.service";
-import {map} from "rxjs/operators";
+import {map, switchMap} from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root',
@@ -53,16 +53,16 @@ export class WordService {
 
     getWords(sort: string, asc: boolean, page: number, pageSize: number): Observable<ResponsePagingWrapper<WordLink>> {
         return this.dictionaryService.getDictionary()
-            .pipe<Dictionary, Dictionary>(
-                map((d) => {
+            .pipe<Dictionary, ResponsePagingWrapper<WordLink>>(
+                switchMap((d) => {
                     let dict = d as Dictionary;
                     return dict.sortLinks(sort, asc);
                 }),
                 map((d) => {
                         return new ResponsePagingWrapper(d.wordLinks.length, d.wordLinks);
                     }
-                )
-            );
+                ))
+            ;
     }
 
     private addWordLink(from: string[], to: string[]) {

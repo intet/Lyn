@@ -1,5 +1,5 @@
 export class WordLink {
-    id: Number;
+    id: number;
     from: Word[];
     to: Word[];
     internalId: Number;
@@ -13,7 +13,7 @@ export class WordLink {
 }
 
 export class Word {
-    id: Number;
+    id: number;
     text: String;
     created: Date;
     private _lastAttempt: Date;

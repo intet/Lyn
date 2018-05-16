@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {
     MatAutocompleteModule,
@@ -86,8 +85,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        CommonModule,
-        NgbModule
+        CommonModule
     ]
 })
 export class UtilModule {

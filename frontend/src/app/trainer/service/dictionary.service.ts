@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {of as observableOf} from 'rxjs/observable/of';
 import {Dictionary} from "./entity/dictionary";
 import {Subject} from "rxjs/Subject";
-import {Output} from "@angular/compiler/src/core";
 import {ApiService} from "../../security/service/api.service";
 import {Observable} from "rxjs/Observable";
 
@@ -10,7 +9,6 @@ import {Observable} from "rxjs/Observable";
     providedIn: 'root',
 })
 export class DictionaryService {
-    @Output
     public dictionaryChange = new Subject();
     private dictionary: Dictionary;
 
