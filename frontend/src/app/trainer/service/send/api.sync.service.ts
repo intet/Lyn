@@ -12,7 +12,7 @@ export class SyncApiService {
     private links: Map<number, WordLink> = new Map();
     private linkRequests: Map<number, LinkRequest> = new Map();
     private timer;
-
+    public sync: boolean = false;
     constructor(private api: ApiService) {
         this.timer = timer(10000, 10000);
         this.timer.subscribe((t) => this.onTime())
@@ -28,6 +28,8 @@ export class SyncApiService {
 
     onTime() {
         if (this.links.size == 0) return;
+        if (this.sync) return;
+        this.sync = true;
         this.api.post(ApiService.api_path + '/saveLinks', Array.from(this.linkRequests.values())).subscribe(
             (t: ResponseEditWrapper) => {
                 let ids: number[] = [];
@@ -55,7 +57,7 @@ export class SyncApiService {
                     this.linkRequests.delete(id);
                     this.links.delete(id);
                 });
-
+                this.sync = false;
             }
         );
     }
