@@ -32,7 +32,7 @@ public class Dictionary {
     @JoinColumn(name = "to_language", referencedColumnName = "id")
     public Language languageTo;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "word_link_dictionary",
             joinColumns = @JoinColumn(name = "dictionary_id", referencedColumnName = "id"),
