@@ -22,18 +22,19 @@ export class WordService {
          this.addWordLink(["key"], ["источник", "ключ"]);*/
     }
 
-    private static getWord(dictionary: Dictionary, text: string) {
+    private static getWord(dictionary: Dictionary, text: string, isFrom: boolean) {
         if (!text)
             return null;
         text = text.trim();
         if (text.length == 0)
             return null;
 
-        let key = text.toLocaleLowerCase();
-        let word = dictionary.wordMap.get(key);
+        const key = text.toLocaleLowerCase();
+        const map = (isFrom ? dictionary.wordMapFrom : dictionary.wordMapTo);
+        let word = map.get(key);
         if (word == null) {
             word = new Word(text);
-            dictionary.wordMap.set(key, word);
+            map.set(key, word);
         }
         return word;
     }
@@ -66,19 +67,19 @@ export class WordService {
 
     private addWordLink(from: string[], to: string[]) {
         this.dictionaryService.getDictionary().subscribe((dictionary: Dictionary) => {
-            let fromWords: Word[] = [];
-            let toWords: Word[] = [];
-            from.forEach(text => {
-                let word = WordService.getWord(dictionary, text);
+            const fromWords: Word[] = [];
+            const toWords: Word[] = [];
+            for (const text of from) {
+                let word = WordService.getWord(dictionary, text, true);
                 if (word != null)
                     fromWords.push(word);
-            });
-
-            to.forEach(text => {
-                let word = WordService.getWord(dictionary, text);
+            }
+            for (const text of to) {
+                let word = WordService.getWord(dictionary, text, false);
                 if (word != null)
                     toWords.push(word);
-            });
+            }
+
             let link = new WordLink(fromWords, toWords);
             this.sendService.addLink(dictionary, link);
             dictionary.addWord(link);

@@ -4,6 +4,8 @@ import {Dictionary} from "./entity/dictionary";
 import {Subject} from "rxjs/Subject";
 import {ApiService} from "../../security/service/api.service";
 import {Observable} from "rxjs/Observable";
+import {Language} from "./entity/language";
+import {WordLink} from "./entity/word";
 
 @Injectable({
     providedIn: 'root',
@@ -18,8 +20,8 @@ export class DictionaryService {
 
     loadDefault(): Observable<Dictionary> {
         return this.api.get(ApiService.api_path + '/getDefaultDictionary')
-            .map<any, Dictionary>((result) => {
-                this.dictionary = new Dictionary(result.id, result.name, result.languageFrom, result.languageTo);
+            .map<any, Dictionary>((result: DictionaryResult) => {
+                this.dictionary = new Dictionary(result);
                 return this.dictionary;
             });
     }
@@ -33,4 +35,12 @@ export class DictionaryService {
         }
     }
 
+}
+
+export interface DictionaryResult {
+    id: number;
+    name: string;
+    languageFrom: Language;
+    languageTo: Language;
+    words: WordLink[];
 }

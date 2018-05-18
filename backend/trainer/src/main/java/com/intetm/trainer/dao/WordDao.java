@@ -75,6 +75,7 @@ public class WordDao {
         for (WordRequest w : linkRequest.to) {
             link.to.add(new Word(w.id));
         }
+        link.dictionary = new Dictionary(linkRequest.dictionary);
         return wordLinkRepository.save(link).id;
     }
 }

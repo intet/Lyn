@@ -1,5 +1,6 @@
 package com.intetm.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -13,6 +14,11 @@ public class WordLink {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "dictionary", referencedColumnName = "id")
+    public Dictionary dictionary;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)

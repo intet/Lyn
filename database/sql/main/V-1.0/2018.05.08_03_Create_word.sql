@@ -46,19 +46,12 @@ CREATE TABLE WORD
 --changeset Sivodedov Dmitry:create_table_word_link
 CREATE TABLE WORD_LINK
 (
-  ID   BIGINT PRIMARY KEY NOT NULL IDENTITY,
-  TYPE INTEGER
+  ID         BIGINT PRIMARY KEY NOT NULL IDENTITY,
+  DICTIONARY BIGINT             NOT NULL,
+  TYPE       INTEGER,
+  CONSTRAINT FK_LINK_DICTIONARY FOREIGN KEY (DICTIONARY) REFERENCES DICTIONARY (ID)
 );
 --rollback drop table word_link;
---changeset Sivodedov Dmitry:create_table_word_link_dictionary
-CREATE TABLE WORD_LINK_DICTIONARY
-(
-  DICTIONARY_ID BIGINT NOT NULL,
-  LINK_ID       BIGINT NOT NULL,
-  CONSTRAINT FK_WORD_LINK_D FOREIGN KEY (DICTIONARY_ID) REFERENCES DICTIONARY (ID),
-  CONSTRAINT FK_WORD_LINK_L FOREIGN KEY (LINK_ID) REFERENCES WORD_LINK (ID)
-);
---rollback drop table word_link_dictionary;
 --changeset Sivodedov Dmitry:create_table_word_link_from
 CREATE TABLE WORD_LINK_FROM
 (

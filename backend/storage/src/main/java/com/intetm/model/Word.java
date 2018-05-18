@@ -1,5 +1,7 @@
 package com.intetm.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +17,7 @@ public class Word {
     @Column
     public String text;
 
+    @JsonIgnore
     @Column
     public String ltext;
 
@@ -22,12 +25,16 @@ public class Word {
     @JoinColumn(name = "language", referencedColumnName = "id")
     public Language language;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "dictionary", referencedColumnName = "id")
     public Dictionary dictionary;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "from")
     public List<WordLink> from;
+
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "to")
     public List<WordLink> to;
     @Column(name = "count_attempts")
