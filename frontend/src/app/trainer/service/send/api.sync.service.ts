@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {LinkRequest, Mode} from "./entity";
-import {WordLink} from "../entity/word";
+import {Word, WordLink} from "../entity/word";
 import {timer} from "rxjs/index";
 import {ApiService} from "../../../security/service/api.service";
 import {Dictionary} from "../entity/dictionary";
@@ -28,26 +28,33 @@ export class SyncApiService {
 
     onTime() {
         if (this.links.size == 0) return;
-        this.api.post(ApiService.api_path + '/saveLinks', Array.from(this.links.values())).subscribe(
+        this.api.post(ApiService.api_path + '/saveLinks', Array.from(this.linkRequests.values())).subscribe(
             (t: ResponseEditWrapper) => {
                 let ids: number[] = [];
                 this.links.forEach((link: WordLink, id: number) => {
                     let response = t.rows[id];
+                    if (response == null)
+                        return;
                     link.id = response.id;
                     if (response.success) {
                         ids.push(id);
                     }
-                    /*  response.subResult.forEach((r:EditResult)=>{
-                          link.from.filter((w:Word)=>w.transportId = r.id)
-                              .forEach((w:Word)=> w.id = r.id);
-                          link.to.filter((w:Word)=>w.transportId = r.id)
-                              .forEach((w:Word)=> w.id = r.id);
-                      });*/
+                    link.from.filter((w: Word) => {
+                        const result = response.subResult[w.transportId];
+                        return result != null && result.success
+                    })
+                        .forEach((w: Word) => w.id = response.subResult[w.transportId].id);
+                    link.to.filter((w: Word) => {
+                        const result = response.subResult[w.transportId];
+                        return result != null && result.success
+                    })
+                        .forEach((w: Word) => w.id = response.subResult[w.transportId].id);
+
                 });
-                /*ids.forEach(id=>{
+                ids.forEach(id => {
                     this.linkRequests.delete(id);
                     this.links.delete(id);
-                });*/
+                });
 
             }
         );
