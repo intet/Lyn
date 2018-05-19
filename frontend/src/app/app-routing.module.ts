@@ -9,6 +9,7 @@ import {ChangePasswordComponent} from './security/change-password';
 import {ForbiddenComponent} from './security/forbidden';
 import {SignupComponent} from './security/signup';
 import {DictionaryComponent} from "./trainer/component/word/dictionary/dictionary.component";
+import {TestContainerComponent} from "./trainer/component/test/container/test.container.component";
 
 export const routes: Routes = [
     {
@@ -19,6 +20,12 @@ export const routes: Routes = [
     {
         path: 'grid',
         component: DictionaryComponent,
+        canActivate: [LoginGuard]
+
+    },
+    {
+        path: 'test',
+        component: TestContainerComponent,
         canActivate: [LoginGuard]
 
     },
