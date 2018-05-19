@@ -27,7 +27,9 @@ export class DictionaryComponent implements OnInit {
         });
     }
     newTest(): void {
-        let dialogRef = this.dialog.open(NewTestComponent);
+        let dialogRef = this.dialog.open(NewTestComponent, {
+            width: '250px',
+        });
         dialogRef.afterClosed().subscribe(result => {
             if(result){
                 this.router.navigate(['/test']);

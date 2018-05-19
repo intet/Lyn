@@ -4,3 +4,7 @@
 body {
   margin: 0;
 }
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
