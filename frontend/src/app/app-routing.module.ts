@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from './home';
+import {HomeComponent} from './component/home';
 import {LoginComponent} from './security/login';
-import {AdminComponent} from './admin';
+import {AdminComponent} from './component/admin';
 import {AdminGuard, GuestGuard, LoginGuard} from './security/guard';
 import {NotFoundComponent} from './security/not-found';
 import {ChangePasswordComponent} from './security/change-password';

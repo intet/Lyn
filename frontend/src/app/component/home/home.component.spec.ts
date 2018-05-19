@@ -1,11 +1,11 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {HomeComponent} from './home.component';
-import {ApiCardComponent} from '../component';
-import {MockApiService} from '../security/service/mocks/api.service.mock';
+import {ApiCardComponent} from '../index';
+import {MockApiService} from '../../security/service/mocks/api.service.mock';
 
 import {MatButtonModule, MatCardModule} from '@angular/material';
 
-import {ApiService, AuthService, ConfigService, FooService, UserService} from '../security/service';
+import {ApiService, AuthService, ConfigService, FooService, UserService} from '../../security/service/index';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;

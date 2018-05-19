@@ -2,12 +2,12 @@ import {async, TestBed} from '@angular/core/testing';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
-import {MockApiService} from './security/service/mocks/api.service.mock';
+import {MockApiService} from '../../security/service/mocks/api.service.mock';
 
 import {MatIconRegistry, MatToolbarModule} from '@angular/material';
 
 
-import {ApiService, AuthService, ConfigService, FooService, UserService} from './security/service';
+import {ApiService, AuthService, ConfigService, FooService, UserService} from '../../security/service/index';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
