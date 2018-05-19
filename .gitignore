@@ -30,3 +30,4 @@ nbdist/
 npm-debug.*
 src/main/resources/static/
 /database/dev/
+/frontend/package-lock.json

@@ -39,7 +39,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
      * The below paths will get ignored by the filter
      */
     public static final String ROOT_MATCHER = "/";
-    public static final String FAVICON_MATCHER = "/favicon.ico";
     public static final String HTML_MATCHER = "/**/*.html";
     public static final String CSS_MATCHER = "/**/*.css";
     public static final String JS_MATCHER = "/**/*.js";
@@ -50,7 +49,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     private List<String> pathsToSkip = Arrays.asList(
             ROOT_MATCHER,
             HTML_MATCHER,
-            FAVICON_MATCHER,
             CSS_MATCHER,
             JS_MATCHER,
             IMG_MATCHER,
