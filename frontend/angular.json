@@ -12,16 +12,16 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "../server/src/main/resources/static",
-            "index": "src/index.html",
+            "index": "src/assets/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": "src/config/polyfills.ts",
             "assets": [
-              "src/assets"
+              "src/assets/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "src/app-theme.scss"
+              "src/assets/css/styles.css",
+              "src/assets/css/app-theme.scss"
             ],
             "scripts": []
           },
@@ -67,7 +67,7 @@
           "options": {
             "main": "src/test.ts",
             "karmaConfig": "./karma.conf.js",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": "src/config/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
