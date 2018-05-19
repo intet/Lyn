@@ -8,8 +8,8 @@ import {AccountMenuComponent} from './component/header/account-menu/account-menu
 import {ApiCardComponent, HeaderComponent} from './component';
 import {AdminComponent} from "./component/admin/admin.component";
 import {TrainerModuleModule} from "./trainer/trainer.module";
-import {UtilModule} from "./util/util.module";
-import {getRussianPaginatorIntl} from "./util/russian-paginator-intl";
+import {UtilModule} from "./shared/util/util.module";
+import {getRussianPaginatorIntl} from "./shared/util/russian-paginator-intl";
 import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({

@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {Word, WordLink} from "./entity/word";
-import {ResponsePagingWrapper} from "../../util/entity";
+import {ResponsePagingWrapper} from "../../shared/util/entity";
 import {Dictionary} from "./entity/dictionary";
 import {RowLink} from "../component/word/add/add.word.component";
 import {Subject} from "rxjs/Subject";

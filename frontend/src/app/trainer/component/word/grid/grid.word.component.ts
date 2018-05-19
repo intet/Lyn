@@ -7,7 +7,7 @@ import {switchMap} from 'rxjs/operators/switchMap';
 import {of as observableOf} from 'rxjs/observable/of';
 import {catchError} from 'rxjs/operators/catchError';
 import {WordService} from "../../../service/word.service";
-import {ResponsePagingWrapper} from "../../../../util/entity";
+import {ResponsePagingWrapper} from "../../../../shared/util/entity";
 import {WordLink} from "../../../service/entity/word";
 
 @Component({
