@@ -9,16 +9,19 @@ import {WordAddComponent} from "./component/word/add/add.word.component";
 import {DictionaryComponent} from "./component/word/dictionary/dictionary.component";
 
 @NgModule({
-  declarations: [
-      WordStepComponent, WordGridComponent, WordAddComponent, DictionaryComponent
-  ],
-  providers: [
-    WordService
-  ],
-  imports: [
-    UtilModule,
-    SecurityModule,
-  ]
+    declarations: [
+        WordStepComponent, WordGridComponent, WordAddComponent, DictionaryComponent
+    ],
+    entryComponents: [
+        WordAddComponent
+    ],
+    providers: [
+        WordService
+    ],
+    imports: [
+        UtilModule,
+        SecurityModule,
+    ]
 })
 export class TrainerModuleModule {
 }

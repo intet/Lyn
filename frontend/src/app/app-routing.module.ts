@@ -8,57 +8,49 @@ import {NotFoundComponent} from './security/not-found';
 import {ChangePasswordComponent} from './security/change-password';
 import {ForbiddenComponent} from './security/forbidden';
 import {SignupComponent} from './security/signup';
-import {WordStepComponent} from "./trainer/component/step/step.component";
-import {WordAddComponent} from "./trainer/component/word/add/add.word.component";
 import {DictionaryComponent} from "./trainer/component/word/dictionary/dictionary.component";
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent,
-    pathMatch: 'full'
-  },
-  {
-    path:'signup',
-    component: SignupComponent,
-    canActivate: [GuestGuard],
-    pathMatch:'full'
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    canActivate: [GuestGuard]
-  },
-  {
-    path: 'change-password',
-    component: ChangePasswordComponent,
-    canActivate: [LoginGuard]
-  },
-  {
-    path: 'admin',
-    component: AdminComponent,
-    canActivate: [AdminGuard]
-  },
-  {
-    path: '404',
-    component: NotFoundComponent
-  },
-  {
-    path: '403',
-    component: ForbiddenComponent
-  },
-  {
-    path: 'word',
-    component: WordStepComponent
-  },
-  {
-    path: 'grid',
-      component: DictionaryComponent
-  },
-  {
-      path: 'add',
-      component: WordAddComponent
-  },
+    {
+        path: '',
+        component: HomeComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'grid',
+        component: DictionaryComponent,
+        canActivate: [LoginGuard]
+
+    },
+    {
+        path: 'signup',
+        component: SignupComponent,
+        canActivate: [GuestGuard],
+        pathMatch: 'full'
+    },
+    {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [GuestGuard]
+    },
+    {
+        path: 'change-password',
+        component: ChangePasswordComponent,
+        canActivate: [LoginGuard]
+    },
+    {
+        path: 'admin',
+        component: AdminComponent,
+        canActivate: [AdminGuard]
+    },
+    {
+        path: '404',
+        component: NotFoundComponent
+    },
+    {
+        path: '403',
+        component: ForbiddenComponent
+    },
     {
         path: '**',
         redirectTo: '/404'
@@ -66,8 +58,9 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-  providers: []
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
+    providers: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

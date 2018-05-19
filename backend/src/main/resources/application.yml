@@ -3,7 +3,7 @@ app:
 
 jwt:
   header: Authorization
-  expires_in: 600 # 10 minutes
+  expires_in: 60000 # 1000 minutes
   secret: queenvictoria
   cookie: AUTH-TOKEN
 
@@ -21,3 +21,6 @@ spring:
     username: SA
     password: password
     driver-class-name: org.hsqldb.jdbc.JDBCDriver
+
+server:
+  port: 7480

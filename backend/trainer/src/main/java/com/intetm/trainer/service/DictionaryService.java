@@ -2,21 +2,42 @@ package com.intetm.trainer.service;
 
 import com.intetm.model.Dictionary;
 import com.intetm.repository.DictionaryRepository;
-import com.intetm.util.entity.ResponsePagingWrapper;
+import com.intetm.trainer.dao.WordDao;
+import com.intetm.trainer.rest.wrapper.LinkRequest;
+import com.intetm.trainer.rest.wrapper.WordRequest;
+import com.intetm.util.entity.EditResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
+@Transactional
 public class DictionaryService {
+    @Autowired
+    public WordDao wordDao;
 
     @Autowired
-    DictionaryRepository dictionaryRepository;
+    public DictionaryRepository dictionaryRepository;
 
-    public ResponsePagingWrapper<Dictionary> getAll(String username) {
-        long total = dictionaryRepository.countByUserName(username);
-        List<Dictionary> rows = dictionaryRepository.findByUserName(username);
-        return new ResponsePagingWrapper<>(rows, total);
+    public Map<Long, EditResult<Long>> addLink(LinkRequest linkRequest) {
+        Map<Long, EditResult<Long>> wordResult = new HashMap<>();
+        for (WordRequest word : linkRequest.from) {
+            word.id = wordDao.saveWord(linkRequest.dictionary, word);
+            wordResult.put(word.transportId, new EditResult<>(word.id));
+        }
+        for (WordRequest word : linkRequest.to) {
+            word.id = wordDao.saveWord(linkRequest.dictionary, word);
+            wordResult.put(word.transportId, new EditResult<>(word.id));
+        }
+
+        linkRequest.id = wordDao.saveLink(linkRequest);
+        return wordResult;
+    }
+
+    public Dictionary getDefaultDictionary(String username) {
+        return dictionaryRepository.findByUserName(username).get(0);
     }
 }

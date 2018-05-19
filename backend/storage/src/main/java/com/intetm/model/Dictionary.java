@@ -1,5 +1,6 @@
 package com.intetm.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -18,8 +19,10 @@ public class Dictionary {
     @Column(name = "name")
     public String name;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user", referencedColumnName = "id")
+    @Fetch(FetchMode.SELECT)
     public User user;
 
     @ManyToOne
@@ -30,10 +33,13 @@ public class Dictionary {
     @JoinColumn(name = "to_language", referencedColumnName = "id")
     public Language languageTo;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinTable(name = "word_link_dictionary",
-            joinColumns = @JoinColumn(name = "dictionary_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "link_id", referencedColumnName = "id"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "dictionary")
     public List<WordLink> words;
+
+    public Dictionary() {
+    }
+
+    public Dictionary(Long id) {
+        this.id = id;
+    }
 }
