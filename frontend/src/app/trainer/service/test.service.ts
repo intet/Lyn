@@ -2,9 +2,10 @@ import {Injectable} from "@angular/core";
 import {SyncApiService} from "./send/api.sync.service";
 import {DictionaryService} from "./dictionary.service";
 import {Observable} from "rxjs/Observable";
-import {Test, TestParam} from "./entity/test";
-import {map, switchMap} from "rxjs/operators";
+import {Test} from "./entity/test";
+import {map} from "rxjs/operators";
 import {Dictionary} from "./entity/dictionary";
+import {TestParam} from "./entity/test-param";
 
 @Injectable({
     providedIn: 'root',

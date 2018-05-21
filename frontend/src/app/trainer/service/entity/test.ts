@@ -1,6 +1,7 @@
 import {Dictionary} from "./dictionary";
 import {Word, WordLink} from "./word";
 import {shuffle} from "../../../shared/utilities/collections.util";
+import {TestParam, TestType, TestWordAttempt, TestWordStatus} from "./test-param";
 
 export class Test {
 
@@ -10,25 +11,30 @@ export class Test {
     //Содержит слова в порядке тестирования. Слова повторяются testCount раз.
     //В случае ошибок добавляется в конец новые слова так чтобы подряд человек набил lineSuccessCount раз
     public words:TestWordAttempt[];
-    public wordsStatus:Map<string, TestWordStatus> = new Map();
+    public wordsStatus: Map<Word, TestWordStatus>;
     constructor(wordLinks: WordLink[], params: TestParam) {
         this.params = params;
-        this.words = [];
-        let counter = params.testCount;
-        this.words = this.initAttempts(counter, wordLinks, params.type);
+        this.wordsStatus = new Map();
+        this.words = this.initAttempts(params.testCount, wordLinks, params.type, this.wordsStatus);
     }
 
-    private initAttempts(counter, wordLinks: WordLink[], type: TestType) {
+    private initAttempts(testCount: number, wordLinks: WordLink[], type: TestType, map: Map<Word, TestWordStatus>) {
         const array = [];
-        while (counter > 0) {
+        for (let counter = 0; counter < testCount; counter++) {
             for (let link of wordLinks) {
                 if (type == TestType.FROM || type == TestType.BOTH) {
                     for (let word of link.from) {
+                        if (counter == 0) {
+                            map.set(word, new TestWordStatus());
+                        }
                         array.push(new TestWordAttempt(word, true, link));
                     }
                 }
                 if (type == TestType.TO || type == TestType.BOTH) {
                     for (let word of link.to) {
+                        if (counter == 0) {
+                            map.set(word, new TestWordStatus());
+                        }
                         array.push(new TestWordAttempt(word, false, link));
                     }
                 }
@@ -39,30 +45,3 @@ export class Test {
     }
 }
 
-export class TestParam {
-    lineSuccessCount: number=2;
-    testCount:number=2;
-    wordCount:number;
-    type:TestType=TestType.FROM;
-    //TODO подумать над тем что проверять буду слова в обе стороны
-}
-
-export class TestWordStatus {
-    countAttempts:number;
-    countSuccess:number;
-    countFail:number;
-    countLineSuccess:number;
-}
-export enum TestType {
-    FROM, TO, BOTH
-}
-export class TestWordAttempt {
-    text:Word;
-    from:boolean;
-    link:WordLink;
-    constructor(text: Word, from: boolean, link: WordLink) {
-        this.text = text;
-        this.from = from;
-        this.link = link;
-    }
-}

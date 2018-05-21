@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {TestParam} from "../../../service/entity/test";
+import {TestParam} from "../../../service/entity/test-param";
 
 @Component({
     selector: 'new-test-dialog',

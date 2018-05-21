@@ -4,6 +4,7 @@ import {RowLink, WordAddComponent} from "../add/add.word.component";
 import {WordService} from "../../../service/word.service";
 import {NewTestComponent} from "../../test/new-test/new-test.component";
 import {Router} from "@angular/router";
+import {TestParam} from "../../../service/entity/test-param";
 
 @Component({
     selector: 'dictionary',
@@ -30,9 +31,9 @@ export class DictionaryComponent implements OnInit {
         let dialogRef = this.dialog.open(NewTestComponent, {
             width: '250px',
         });
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe((result: TestParam) => {
             if(result){
-                this.router.navigate(['/test']);
+                this.router.navigate(['/test', result]);
             }
         });
     }

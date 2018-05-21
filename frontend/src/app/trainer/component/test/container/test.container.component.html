@@ -1,1 +1,8 @@
-Тут ничего нет!!!!
+<div>
+    <div class="loading-shade" *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="!isLoading">
+        Тут ничего нет!!!!
+    </div>
+</div>

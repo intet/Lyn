@@ -1,6 +1,8 @@
 import {Component, OnInit} from "@angular/core";
-import {MatDialog} from "@angular/material";
-import {WordService} from "../../../service/word.service";
+import {ActivatedRoute} from "@angular/router";
+import {TestParam} from "../../../service/entity/test-param";
+import {TestService} from "../../../service/test.service";
+import {Test} from "../../../service/entity/test";
 
 @Component({
     selector: 'test-container',
@@ -8,20 +10,20 @@ import {WordService} from "../../../service/word.service";
     styleUrls: ['./test.container.component.css']
 })
 export class TestContainerComponent implements OnInit {
-    constructor(public dialog: MatDialog, private wordService: WordService) {
+    readonly params: TestParam;
+    test: Test;
+    public isLoading: boolean = true;
+
+    constructor(private testService: TestService,
+                route: ActivatedRoute) {
+        this.params = route.snapshot.params as TestParam;
     }
     ngOnInit() {
-
-    }
-
-    openDialog(): void {
-        let form = this;
-      /*  let dialogRef = this.dialog.open(WordAddComponent);
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                form.wordService.createLink(result as RowLink);
-            }
-        });*/
+        this.isLoading = true;
+        this.testService.getTest(this.params).subscribe((test: Test) => {
+            this.isLoading = false;
+            this.test = test;
+        });
     }
 }
 
