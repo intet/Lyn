@@ -6,7 +6,7 @@
     "preinstall": "npm i -g @angular/cli",
     "ng": "ng",
     "start": "ng serve --proxy-config src/config/proxy.conf.json --no-progress",
-    "build": "ng build",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
