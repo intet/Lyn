@@ -19,12 +19,12 @@ export enum TestType {
 }
 
 export class TestWordAttempt {
-    text: Word;
+    word: Word;
     from: boolean;
     link: WordLink;
 
-    constructor(text: Word, from: boolean, link: WordLink) {
-        this.text = text;
+    constructor(word: Word, from: boolean, link: WordLink) {
+        this.word = word;
         this.from = from;
         this.link = link;
     }

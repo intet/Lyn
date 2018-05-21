@@ -20,7 +20,7 @@ export class TestContainerComponent implements OnInit {
     }
     ngOnInit() {
         this.isLoading = true;
-        this.testService.getTest(this.params).subscribe((test: Test) => {
+        this.testService.createTest(this.params).subscribe((test: Test) => {
             this.isLoading = false;
             this.test = test;
         });

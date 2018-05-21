@@ -6,11 +6,13 @@ import {Test} from "./entity/test";
 import {map} from "rxjs/operators";
 import {Dictionary} from "./entity/dictionary";
 import {TestParam} from "./entity/test-param";
+import {of as observableOf} from 'rxjs/observable/of';
 
 @Injectable({
     providedIn: 'root',
 })
 export class TestService {
+    test: Test;
     constructor(private sendService: SyncApiService, private dictionaryService: DictionaryService) {
         /* this.dictionary = new Dictionary(1, 'test');
          this.addSimpleWordLink("world", "мир");
@@ -18,12 +20,17 @@ export class TestService {
          this.addWordLink(["key"], ["источник", "ключ"]);*/
     }
 
+    public getTest(): Observable<Test> {
+        return observableOf(this.test);
+    }
 
-    public getTest(params:TestParam):Observable<Test>{
+    public createTest(params: TestParam): Observable<Test> {
         return this.dictionaryService.getDictionary().pipe(
             map<Dictionary, Test>((dictionary:Dictionary)=>{
-                return new Test(dictionary.wordLinks, params);
+                this.test = new Test(dictionary.wordLinks, params);
+                return this.test;
             })
         )
     }
+
 }

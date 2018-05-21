@@ -3,6 +3,6 @@
         <mat-spinner></mat-spinner>
     </div>
     <div *ngIf="!isLoading">
-        Тут ничего нет!!!!
+        <step-word [word]="test.getCurrentWord()"></step-word>
     </div>
 </div>
