@@ -14,7 +14,7 @@
             "outputPath": "../server/src/main/resources/static",
             "index": "src/config/index.html",
             "main": "src/config/main.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "tsConfig": "src/config/tsconfig.app.json",
             "polyfills": "src/config/polyfills.ts",
             "assets": [
               "src/assets"
@@ -68,7 +68,7 @@
             "main": "src/config/test.ts",
             "karmaConfig": "./src/config/karma.conf.js",
             "polyfills": "src/config/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
+            "tsConfig": "src/config/tsconfig.spec.json",
             "scripts": [],
             "styles": [
               "src/styles.css"
