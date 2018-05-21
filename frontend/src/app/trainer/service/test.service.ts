@@ -5,7 +5,7 @@ import {Observable} from "rxjs/Observable";
 import {Test} from "./entity/test";
 import {map} from "rxjs/operators";
 import {Dictionary} from "./entity/dictionary";
-import {TestParam} from "./entity/test-param";
+import {TestParam, TestWordAttempt} from "./entity/test-param";
 import {of as observableOf} from 'rxjs/observable/of';
 
 @Injectable({
@@ -14,10 +14,6 @@ import {of as observableOf} from 'rxjs/observable/of';
 export class TestService {
     test: Test;
     constructor(private sendService: SyncApiService, private dictionaryService: DictionaryService) {
-        /* this.dictionary = new Dictionary(1, 'test');
-         this.addSimpleWordLink("world", "мир");
-         this.addSimpleWordLink("tree", "дерево");
-         this.addWordLink(["key"], ["источник", "ключ"]);*/
     }
 
     public getTest(): Observable<Test> {
@@ -33,4 +29,20 @@ export class TestService {
         )
     }
 
+    testWord(attempt: TestWordAttempt, input: String) {
+        let valid = this.isValid(attempt, input);
+        this.sendService.addWordAttempt(attempt.word, valid);
+        return valid;
+    }
+
+    private isValid(attempt: TestWordAttempt, input: String) {
+        const text = input.trim().toLocaleLowerCase();
+        const words = attempt.from ? attempt.link.from : attempt.link.to;
+        for (let word of words) {
+            if (text == word.text.toLocaleLowerCase().trim()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -17,27 +17,30 @@ export class WordStepComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.testService.getTest().subscribe((t: Test) => {
-            this.attempt = t.getCurrentWord()
-        });
+        this.updateWord();
     }
+
 
     onEnter(e: any) {
         if (e.keyCode != 13) return;
         e.preventDefault();
-        /*   if (this.wordService.testWord(this.word, this.input)) {
-               this.word = this.wordService.activeTest.getNextWord();
-               this.input = '';
-               this.invalid = false;
-           }
-           else {
-               this.wordService.activeTest.markInvalid();*/
-        this.input = '';
-        this.invalid = true;
-        this.swing();
-        //}
+        if (this.testService.testWord(this.attempt, this.input)) {
+            this.updateWord();
+            this.input = '';
+            this.invalid = false;
+        }
+        else {
+            this.input = '';
+            this.invalid = true;
+            this.swing();
+        }
     }
 
+    private updateWord() {
+        this.testService.getTest().subscribe((t: Test) => {
+            this.attempt = t.getCurrentWord()
+        });
+    }
     swing() {
         setTimeout(() => {
             this.invalid = false;

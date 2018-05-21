@@ -1,22 +1,21 @@
+import {SyncApiService} from "../send/api.sync.service";
+
 export class WordLink {
     id: number;
     from: Word[];
     to: Word[];
-    internalId: number;
-    private static internalId = -1;
+    transportId: number;
 
     constructor(form: Word[], to: Word[]) {
         this.id = null;
         this.from = form;
         this.to = to;
-        this.internalId = WordLink.internalId;
-        WordLink.internalId--;
+        this.transportId = SyncApiService.generateTransportId();
     }
 }
 
 export class Word {
     id: number;
-    private static internalId = -1;
     transportId: number;
     text: String;
     created: Date;
@@ -28,8 +27,7 @@ export class Word {
         this.id = null;
         this.text = text;
         this.created = new Date();
-        this.transportId = Word.internalId;
-        Word.internalId--;
+        this.transportId = SyncApiService.generateTransportId();
     }
 
     private _countAttempts: number = 0;
