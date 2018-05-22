@@ -1,21 +1,31 @@
 import {Word} from "../entity/word";
 
-export class LinkRequest {
+export class ObjectRequest {
+    constructor(public id: number,
+                public transportId: number) {
+    }
+
+}
+
+export class LinkRequest extends ObjectRequest {
     constructor(public  mode: Mode,
-                public id: Number,
-                public transportId: Number,
+                public id: number,
+                public transportId: number,
                 public dictionary: Number,
                 public from: Word[],
                 public to: Word[]) {
+        super(id, transportId);
     };
 
 }
 
-export class AttemptRequest {
-    public id: number;
-    public transportId: number;
+export class AttemptRequest extends ObjectRequest {
     public successCount: number = 0;
     public errorCount: number = 0;
+
+    constructor(id: number, transportId: number) {
+        super(id, transportId);
+    }
 }
 
 export interface ResponseEditWrapper {
@@ -28,6 +38,7 @@ export interface EditResult {
     error: string;
     subResult: EditResult[];
 }
+
 export enum Mode {
     ADD, EDIT, REMOVE
 }
