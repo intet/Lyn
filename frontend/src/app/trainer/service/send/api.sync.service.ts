@@ -62,7 +62,7 @@ export class SyncApiService {
 
         this.addRequest('/syncAttempts', word, word, attemptRequest,
             ((word: Word, attemptRequest: AttemptRequest) => {
-                if (word.id = null) {
+                if (word.id == null) {
                     return null;
                 }
                 else {
@@ -75,7 +75,7 @@ export class SyncApiService {
                 item.param.countFail += param.countFail;
             }),
             ((response: EditResult<Word>, word: Word) => {
-                word.update(response.info);
+                Word.update(word, response.info);
             })
         );
     }
@@ -99,7 +99,7 @@ export class SyncApiService {
                 mapParam.set(r.transportId, item);
             }
             for (let key of keys) {
-                mapParam.delete(key);
+                items.delete(key);
             }
             if (!this.checkAndStartSync(requests))
                 return;
@@ -114,6 +114,8 @@ export class SyncApiService {
                         }
                     });
                     this.sync--;
+                }, () => {
+                    this.sync--
                 }
             );
         });

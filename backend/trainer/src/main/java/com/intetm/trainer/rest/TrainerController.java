@@ -1,6 +1,7 @@
 package com.intetm.trainer.rest;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.intetm.model.Dictionary;
 import com.intetm.model.Word;
 import com.intetm.trainer.rest.wrapper.AttemptRequest;
@@ -35,6 +36,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 @RequestMapping(value = "/api/trainer", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public class TrainerController {
+    public static final Gson GSON = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     private final DictionaryService dictionaryService;
     private final SecurityService securityService;
     private static final Logger LOG = LoggerFactory.getLogger(TrainerController.class);
@@ -85,7 +87,7 @@ public class TrainerController {
                 response.putError(linkRequest.transportId, ex.getLocalizedMessage());
             }
         }
-        return new Gson().toJson(response);
+        return GSON.toJson(response);
     }
 
     @RequestMapping(method = POST, value = "/syncAttempts")
@@ -93,16 +95,14 @@ public class TrainerController {
         ResponseEditWrapper<Long, Word> response = new ResponseEditWrapper<>();
         for (AttemptRequest request : attemptRequests) {
             try {
-
-                Word word = dictionaryService.syncAttempts(request);
+                Word word = dictionaryService.syncAttempts(request, principal.getName());
                 response.putSuccess(request.transportId, request.id, word);
-
             } catch (Exception ex) {
                 LOG.error(ex.getMessage(), ex);
                 response.putError(request.transportId, ex.getLocalizedMessage());
             }
         }
-        return new Gson().toJson(response);
+        return GSON.toJson(response);
     }
 
     @RequestMapping(method = GET, value = "/getDefaultDictionary")

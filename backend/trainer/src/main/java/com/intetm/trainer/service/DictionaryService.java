@@ -43,7 +43,7 @@ public class DictionaryService {
         return dictionaryRepository.findByUserName(username).get(0);
     }
 
-    public Word syncAttempts(AttemptRequest attemptRequest) {
-        return wordDao.syncAttempts(attemptRequest.id, attemptRequest.countSuccess, attemptRequest.countFail);
+    public Word syncAttempts(AttemptRequest attemptRequest, String userName) {
+        return wordDao.syncAttempts(attemptRequest.id, attemptRequest.countSuccess, attemptRequest.countFail, userName);
     }
 }

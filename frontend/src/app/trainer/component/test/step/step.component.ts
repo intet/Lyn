@@ -28,6 +28,7 @@ export class WordStepComponent implements OnInit {
             this.updateWord();
             this.input = '';
             this.invalid = false;
+            this.testService.moveNext();
         }
         else {
             this.input = '';

@@ -1,9 +1,12 @@
 package com.intetm.util.entity;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class ResponseEditWrapper<T, P> {
+    @Expose
     Map<T, EditResult<T, P>> rows = new HashMap<>();
 
     public void putSuccess(T externalKey, T internalKey) {

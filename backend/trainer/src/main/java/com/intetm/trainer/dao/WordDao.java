@@ -79,8 +79,8 @@ public class WordDao {
         return wordLinkRepository.save(link).id;
     }
 
-    public Word syncAttempts(Long id, Integer countSuccess, Integer countFail) {
-        Word word = wordRepository.getOne(id);
+    public Word syncAttempts(Long id, Integer countSuccess, Integer countFail, String userName) {
+        Word word = wordRepository.findByIdAndUser(id, userName);
         if (word == null)
             return null;
         word.lastAttempt = new Date();

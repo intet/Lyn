@@ -9,5 +9,8 @@ public interface WordRepository extends JpaRepository<Word, Long> {
     @Query("select w from Word w where w.language.id = :language and w.dictionary.id = :dictionary " +
             " and w.ltext = :text")
     Word find(@Param("dictionary") Long dictionary, @Param("language") Long language, @Param("text") String lText);
+
+    @Query("select w from Word w join w.dictionary d join d.user u where w.id = :id and u.username = :user")
+    Word findByIdAndUser(@Param("id") Long id, @Param("user") String user);
 }
 

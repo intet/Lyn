@@ -6,13 +6,14 @@ import {TestParam, TestType, TestWordAttempt, TestWordStatus} from "./test-param
 export class Test {
 
 
-    readonly dictionary:Dictionary;
-    readonly params:TestParam;
+    readonly dictionary: Dictionary;
+    readonly params: TestParam;
     //Содержит слова в порядке тестирования. Слова повторяются testCount раз.
     //В случае ошибок добавляется в конец новые слова так чтобы подряд человек набил lineSuccessCount раз
-    public words:TestWordAttempt[];
+    public words: TestWordAttempt[];
     public wordsStatus: Map<Word, TestWordStatus>;
     public index: number;
+
     constructor(wordLinks: WordLink[], params: TestParam) {
         this.params = params;
         this.wordsStatus = new Map();
@@ -23,6 +24,16 @@ export class Test {
 
     getCurrentWord(): TestWordAttempt {
         return this.words[this.index];
+    }
+
+    moveNext() {
+        if (this.index < this.words.length - 1) {
+            this.index++;
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private initAttempts(testCount: number, wordLinks: WordLink[], type: TestType, map: Map<Word, TestWordStatus>) {

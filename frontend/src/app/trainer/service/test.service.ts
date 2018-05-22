@@ -35,9 +35,13 @@ export class TestService {
         return valid;
     }
 
+    moveNext() {
+        this.test.moveNext();
+    }
+
     private isValid(attempt: TestWordAttempt, input: String) {
         const text = input.trim().toLocaleLowerCase();
-        const words = attempt.from ? attempt.link.from : attempt.link.to;
+        const words = attempt.from ? attempt.link.to : attempt.link.from;
         for (let word of words) {
             if (text == word.text.toLocaleLowerCase().trim()) {
                 return true;

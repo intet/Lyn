@@ -20,8 +20,11 @@ export class Word {
     text: String;
     created: Date;
     language: number;
-    private _lastAttempt: Date;
-    private _lastSuccess: Date;
+    lastAttempt: Date;
+    lastSuccess: Date;
+    countAttempts: number = 0;
+    countSuccess: number = 0;
+    countFail: number = 0;
 
     constructor(text: String) {
         this.id = null;
@@ -30,33 +33,9 @@ export class Word {
         this.transportId = SyncApiService.generateTransportId();
     }
 
-    private _countAttempts: number = 0;
-
-    get countAttempts(): number {
-        return this._countAttempts;
-    }
-
-    private _countSuccess: number = 0;
-
-    get countSuccess(): number {
-        return this._countSuccess;
-    }
-
-    private _countFail: number = 0;
-
-    get countFail(): number {
-        return this._countFail;
-    }
-
-    private _lineSuccess: number = 0;
-
-    get lineSuccess(): number {
-        return this._lineSuccess;
-    }
-
-    update(w: Word) {
-        this._countSuccess = w.countSuccess;
-        this._countFail = w.countFail;
-        this._countAttempts = w.countAttempts;
+    static update(w1: Word, w2: Word) {
+        w1.countAttempts = w2.countAttempts;
+        w1.countFail = w2.countFail;
+        w1.countSuccess = w2.countSuccess;
     }
 }
