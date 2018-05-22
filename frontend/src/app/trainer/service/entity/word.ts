@@ -54,17 +54,9 @@ export class Word {
         return this._lineSuccess;
     }
 
-    attempt(success: boolean) {
-        this._countAttempts++;
-        this._lastAttempt = new Date();
-        if (success) {
-            this._lineSuccess++;
-            this._countSuccess++;
-            this._lastSuccess = new Date();
-        }
-        else {
-            this._lineSuccess = 0;
-            this._countFail++;
-        }
+    update(w: Word) {
+        this._countSuccess = w.countSuccess;
+        this._countFail = w.countFail;
+        this._countAttempts = w.countAttempts;
     }
 }

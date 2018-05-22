@@ -2,6 +2,8 @@ package com.intetm.trainer.rest;
 
 import com.google.gson.Gson;
 import com.intetm.model.Dictionary;
+import com.intetm.model.Word;
+import com.intetm.trainer.rest.wrapper.AttemptRequest;
 import com.intetm.trainer.rest.wrapper.LinkRequest;
 import com.intetm.trainer.service.DictionaryService;
 import com.intetm.trainer.service.SecurityService;
@@ -65,7 +67,7 @@ public class TrainerController {
 
     @RequestMapping(method = POST, value = "/saveLinks")
     public String saveLinks(@RequestBody LinkRequest[] linkRequests, Principal principal) {
-        ResponseEditWrapper<Long> response = new ResponseEditWrapper<>();
+        ResponseEditWrapper<Long, Object> response = new ResponseEditWrapper<>();
         Long dicId = null;
         for (LinkRequest linkRequest : linkRequests) {
             try {
@@ -75,12 +77,29 @@ public class TrainerController {
                         break;
                 }
                 if (linkRequest.mode == EditMode.ADD || linkRequest.mode == EditMode.EDIT) {
-                    Map<Long, EditResult<Long>> wordResult = dictionaryService.addLink(linkRequest);
-                    response.putSuccess(linkRequest.transportId, linkRequest.id, wordResult);
+                    Map<Long, EditResult<Long, Object>> wordResult = dictionaryService.addLink(linkRequest);
+                    response.putSuccess(linkRequest.transportId, linkRequest.id, null, wordResult);
                 }
             } catch (Exception ex) {
                 LOG.error(ex.getMessage(), ex);
                 response.putError(linkRequest.transportId, ex.getLocalizedMessage());
+            }
+        }
+        return new Gson().toJson(response);
+    }
+
+    @RequestMapping(method = POST, value = "/syncAttempts")
+    public String syncAttempts(@RequestBody AttemptRequest[] attemptRequests, Principal principal) {
+        ResponseEditWrapper<Long, Word> response = new ResponseEditWrapper<>();
+        for (AttemptRequest request : attemptRequests) {
+            try {
+
+                Word word = dictionaryService.syncAttempts(request);
+                response.putSuccess(request.transportId, request.id, word);
+
+            } catch (Exception ex) {
+                LOG.error(ex.getMessage(), ex);
+                response.putError(request.transportId, ex.getLocalizedMessage());
             }
         }
         return new Gson().toJson(response);

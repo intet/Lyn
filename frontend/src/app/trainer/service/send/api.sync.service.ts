@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {AttemptRequest, EditResult, LinkRequest, Mode, ObjectRequest, ResponseEditWrapper} from "./entity";
+import {AttemptRequest, EditResult, EntityRequest, LinkRequest, Mode, ResponseEditWrapper} from "./entity";
 import {Word, WordLink} from "../entity/word";
 import {timer} from "rxjs/index";
 import {ApiService} from "../../../security/service/api.service";
@@ -18,9 +18,6 @@ export class SyncApiService {
     }
 
     public sync: number = 0;
-    private attempts: Map<Word, AttemptRequest> = new Map();
-    private attemptRequests: Map<number, AttemptRequest> = new Map();
-
     public static generateTransportId(): number {
         SyncApiService.transportId -= 1;
         return SyncApiService.transportId;
@@ -39,7 +36,7 @@ export class SyncApiService {
             ((item: ItemForSend<WordLink, Dictionary>, link: WordLink) => {
                 item.object = link;
             }),
-            ((response: EditResult, link: WordLink) => {
+            ((response: EditResult<any>, link: WordLink) => {
                 link.id = response.id;
                 link.from.filter((w: Word) => {
                     const result = response.subResult[w.transportId];
@@ -57,10 +54,10 @@ export class SyncApiService {
     addWordAttempt(word: Word, valid: boolean) {
         let attemptRequest = new AttemptRequest(null, SyncApiService.generateTransportId());
         if (valid) {
-            attemptRequest.successCount += 1;
+            attemptRequest.countSuccess += 1;
         }
         else {
-            attemptRequest.errorCount += 1;
+            attemptRequest.countFail += 1;
         }
 
         this.addRequest('/syncAttempts', word, word, attemptRequest,
@@ -73,12 +70,12 @@ export class SyncApiService {
                     return attemptRequest;
                 }
             }),
-            ((item: ItemForSend<Word, AttemptRequest>, link: Word, param: AttemptRequest) => {
-                item.param.successCount += param.successCount;
-                item.param.errorCount += param.errorCount;
+            ((item: ItemForSend<Word, AttemptRequest>, word: Word, param: AttemptRequest) => {
+                item.param.countSuccess += param.countSuccess;
+                item.param.countFail += param.countFail;
             }),
-            ((response: EditResult, link: Word) => {
-
+            ((response: EditResult<Word>, word: Word) => {
+                word.update(response.info);
             })
         );
     }
@@ -107,7 +104,7 @@ export class SyncApiService {
             if (!this.checkAndStartSync(requests))
                 return;
             this.api.post(ApiService.api_path + url, requests).subscribe(
-                (t: ResponseEditWrapper) => {
+                (t: ResponseEditWrapper<any>) => {
                     mapParam.forEach((item: ItemForSend<any, any>, id: number) => {
                         let response = t.rows[id];
                         if (response == null)
@@ -133,9 +130,9 @@ export class SyncApiService {
     }
 
     private addRequest<K, T, P>(url: string, key: K, object: T, param: P,
-                                requestFn: (object: T, param: P) => ObjectRequest,
+                                requestFn: (object: T, param: P) => EntityRequest,
                                 mergeFn: (item: ItemForSend<T, P>, object: T, param: P) => void,
-                                callbackFn: (r: EditResult, object: T, param: P) => void,
+                                callbackFn: (r: EditResult<any>, object: T, param: P) => void,
                                 errorFn?: (object: T, param: P) => void) {
         let map = this.requests.get(url);
         if (map == null) {
@@ -156,11 +153,11 @@ export class SyncApiService {
 class ItemForSend<T, P> {
     object: T;
     param: P;
-    requestFn: (object: T, param: P) => ObjectRequest;
-    callbackFn: (r: EditResult, object: T, param: P) => void;
+    requestFn: (object: T, param: P) => EntityRequest;
+    callbackFn: (r: EditResult<any>, object: T, param: P) => void;
     errorFn?: (object: T, param: P) => void;
 
-    constructor(object: T, param: P, requestFn: (object: T, param: P) => ObjectRequest, callbackFn: (r: EditResult, object: T, param: P) => void, errorFn: (object: T, param: P) => void) {
+    constructor(object: T, param: P, requestFn: (object: T, param: P) => EntityRequest, callbackFn: (r: EditResult<any>, object: T, param: P) => void, errorFn: (object: T, param: P) => void) {
         this.object = object;
         this.param = param;
         this.requestFn = requestFn;

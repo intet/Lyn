@@ -1,8 +1,10 @@
 package com.intetm.trainer.service;
 
 import com.intetm.model.Dictionary;
+import com.intetm.model.Word;
 import com.intetm.repository.DictionaryRepository;
 import com.intetm.trainer.dao.WordDao;
+import com.intetm.trainer.rest.wrapper.AttemptRequest;
 import com.intetm.trainer.rest.wrapper.LinkRequest;
 import com.intetm.trainer.rest.wrapper.WordRequest;
 import com.intetm.util.entity.EditResult;
@@ -22,8 +24,8 @@ public class DictionaryService {
     @Autowired
     public DictionaryRepository dictionaryRepository;
 
-    public Map<Long, EditResult<Long>> addLink(LinkRequest linkRequest) {
-        Map<Long, EditResult<Long>> wordResult = new HashMap<>();
+    public Map<Long, EditResult<Long, Object>> addLink(LinkRequest linkRequest) {
+        Map<Long, EditResult<Long, Object>> wordResult = new HashMap<>();
         for (WordRequest word : linkRequest.from) {
             word.id = wordDao.saveWord(linkRequest.dictionary, word);
             wordResult.put(word.transportId, new EditResult<>(word.id));
@@ -39,5 +41,9 @@ public class DictionaryService {
 
     public Dictionary getDefaultDictionary(String username) {
         return dictionaryRepository.findByUserName(username).get(0);
+    }
+
+    public Word syncAttempts(AttemptRequest attemptRequest) {
+        return wordDao.syncAttempts(attemptRequest.id, attemptRequest.countSuccess, attemptRequest.countFail);
     }
 }

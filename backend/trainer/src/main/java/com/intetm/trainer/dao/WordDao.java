@@ -78,4 +78,18 @@ public class WordDao {
         link.dictionary = new Dictionary(linkRequest.dictionary);
         return wordLinkRepository.save(link).id;
     }
+
+    public Word syncAttempts(Long id, Integer countSuccess, Integer countFail) {
+        Word word = wordRepository.getOne(id);
+        if (word == null)
+            return null;
+        word.lastAttempt = new Date();
+        if (countSuccess > 0)
+            word.lastSuccess = new Date();
+        word.countAttempts += countSuccess + countFail;
+        word.countSuccess += countSuccess;
+        word.countFail += countFail;
+        wordRepository.save(word);
+        return word;
+    }
 }
