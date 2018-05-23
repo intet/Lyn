@@ -1,6 +1,7 @@
-import {Component, Inject, OnInit} from "@angular/core";
+import {Component, Inject, OnInit, ViewChild} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {WordService} from "../../../service/word.service";
+import {ListWordComponent, Row, RowLink} from "./list/list.word.component";
 
 @Component({
     selector: 'add-word',
@@ -8,7 +9,11 @@ import {WordService} from "../../../service/word.service";
     styleUrls: ['./add.word.component.css']
 })
 export class WordAddComponent implements OnInit {
-    link: RowLink;
+    public link: RowLink;
+    @ViewChild('fromComponent')
+    public fromComponent: ListWordComponent;
+    @ViewChild('toComponent')
+    public toComponent: ListWordComponent;
 
     constructor(public dialogRef: MatDialogRef<WordAddComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,34 +36,8 @@ export class WordAddComponent implements OnInit {
 
     }
 
-    addFrom() {
-        this.afterChange(this.link.from);
-    }
-
-    addTo() {
-        this.afterChange(this.link.to);
-    }
-
-    private afterChange(arr: Row[]) {
-        if (arr[arr.length - 1].text !== '')
-            arr.push(new Row(''));
-    }
-}
-
-export class RowLink {
-    from: Row[];
-    to: Row[];
-
-    constructor() {
-        this.from = [new Row('')];
-        this.to = [new Row('')];
-    }
-}
-
-export class Row {
-    text: string = '';
-
-    constructor(text?: string) {
-        this.text = text;
+    save() {
+        this.wordService.createLink(this.link);
+        this.dialogRef.close(this.link);
     }
 }

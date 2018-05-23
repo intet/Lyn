@@ -3,12 +3,12 @@ import {Observable} from "rxjs/Observable";
 import {Word, WordLink} from "./entity/word";
 import {ResponsePagingWrapper} from "../../shared/util/entity";
 import {Dictionary} from "./entity/dictionary";
-import {RowLink} from "../component/word/add/add.word.component";
 import {Subject} from "rxjs/Subject";
 import {SyncApiService} from "./send/api.sync.service";
 import {DictionaryService} from "./dictionary.service";
 import {map, switchMap} from "rxjs/operators";
 import {ApiService} from "../../security/service/api.service";
+import {RowLink} from "../component/word/add/list/list.word.component";
 
 @Injectable({
     providedIn: 'root',

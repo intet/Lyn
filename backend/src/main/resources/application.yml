@@ -1,0 +1,30 @@
+app:
+  name: anuglar2-spring-jwt
+
+jwt:
+  header: Authorization
+  expires_in: 60000 # 1000 minutes
+  secret: queenvictoria
+  cookie: AUTH-TOKEN
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    com.bfwg: DEBUG
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:hsqldb:hsql://localhost:9001/xdb
+    username: SA
+    password: password
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+
+server:
+  port: 7480
+
+yandex:
+  dictionary:
+    key: dict.1.1.20180523T083012Z.5187d703b2320ea0.478fe2ac9b67502f9ed013be7b50d814e7395e54

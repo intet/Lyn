@@ -10,11 +10,12 @@ import {TestContainerComponent} from "./component/test/container/test.container.
 import {NewTestComponent} from "./component/test/new-test/new-test.component";
 import {WordStepComponent} from "./component/test/step/step.component";
 import {ReaderInputComponent} from "./component/reader/input/reader.input.component";
+import {ListWordComponent} from "./component/word/add/list/list.word.component";
 
 @NgModule({
     declarations: [
         WordStepComponent, WordGridComponent, WordAddComponent, DictionaryComponent,
-        TestContainerComponent, NewTestComponent, ReaderInputComponent
+        TestContainerComponent, NewTestComponent, ReaderInputComponent, ListWordComponent
     ],
     entryComponents: [
         WordAddComponent, NewTestComponent

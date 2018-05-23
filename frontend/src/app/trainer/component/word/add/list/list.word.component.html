@@ -1,0 +1,6 @@
+<div *ngFor="let word of words; let isLast=last">
+    <mat-form-field>
+        <input matInput [(ngModel)]="word.text" (change)="afterChange()">
+    </mat-form-field>
+    <br *ngIf="!isLast"/>
+</div>
