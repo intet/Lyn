@@ -16,8 +16,7 @@ export function getSelectedWord() {
     } while (isLetter(range.toString().charAt(range.toString().length - 1))
     && range.toString().trim() != '');
     range.setEnd(node, range.endOffset - 1);
-    let str = range.toString().trim();
-    return str;
+    return range.toString().trim();
 }
 
 export function isLetter(str) {
