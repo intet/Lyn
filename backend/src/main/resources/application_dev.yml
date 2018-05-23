@@ -24,3 +24,7 @@ spring:
 
 server:
   port: 7480
+
+yandex:
+  dictionary:
+    key: dict.1.1.2018

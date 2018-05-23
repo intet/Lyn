@@ -32,3 +32,4 @@ src/main/resources/static/
 /database/dev/
 /frontend/package-lock.json
 /frontend/node_modules/
+/backend/src/main/resources/application.yml
