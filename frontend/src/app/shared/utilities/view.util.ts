@@ -2,14 +2,24 @@ export function getSelectedWord() {
     let s = window.getSelection();
     let range = s.getRangeAt(0);
     let node = s.anchorNode;
-    while (range.toString().indexOf(' ') != 0) {
+    if (range.startOffset > 0) {
         range.setStart(node, (range.startOffset - 1));
+        while (isLetter(range.toString().charAt(0))) {
+            range.setStart(node, (range.startOffset - 1));
+        }
+
+        range.setStart(node, (range.startOffset + 1));
     }
-    range.setStart(node, range.startOffset + 1);
+
     do {
         range.setEnd(node, range.endOffset + 1);
-
-    } while (range.toString().indexOf(' ') == -1 && range.toString().trim() != '');
+    } while (isLetter(range.toString().charAt(range.toString().length - 1))
+    && range.toString().trim() != '');
+    range.setEnd(node, range.endOffset - 1);
     let str = range.toString().trim();
     return str;
+}
+
+export function isLetter(str) {
+    return str.length === 1 && str.match(/[a-z]/i);
 }
