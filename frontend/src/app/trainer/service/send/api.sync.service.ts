@@ -149,7 +149,6 @@ export class SyncApiService {
             mergeFn(item, object, param);
         }
     }
-
 }
 
 class ItemForSend<T, P> {

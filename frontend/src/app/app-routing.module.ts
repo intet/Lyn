@@ -10,6 +10,7 @@ import {ForbiddenComponent} from './security/forbidden';
 import {SignupComponent} from './security/signup';
 import {DictionaryComponent} from "./trainer/component/word/dictionary/dictionary.component";
 import {TestContainerComponent} from "./trainer/component/test/container/test.container.component";
+import {ReaderInputComponent} from "./trainer/component/reader/input/reader.input.component";
 
 export const routes: Routes = [
     {
@@ -26,6 +27,12 @@ export const routes: Routes = [
     {
         path: 'test',
         component: TestContainerComponent,
+        canActivate: [LoginGuard]
+
+    },
+    {
+        path: 'input',
+        component: ReaderInputComponent,
         canActivate: [LoginGuard]
 
     },

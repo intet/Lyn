@@ -9,11 +9,12 @@ import {DictionaryComponent} from "./component/word/dictionary/dictionary.compon
 import {TestContainerComponent} from "./component/test/container/test.container.component";
 import {NewTestComponent} from "./component/test/new-test/new-test.component";
 import {WordStepComponent} from "./component/test/step/step.component";
+import {ReaderInputComponent} from "./component/reader/input/reader.input.component";
 
 @NgModule({
     declarations: [
         WordStepComponent, WordGridComponent, WordAddComponent, DictionaryComponent,
-        TestContainerComponent, NewTestComponent
+        TestContainerComponent, NewTestComponent, ReaderInputComponent
     ],
     entryComponents: [
         WordAddComponent, NewTestComponent

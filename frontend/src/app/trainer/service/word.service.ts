@@ -8,6 +8,7 @@ import {Subject} from "rxjs/Subject";
 import {SyncApiService} from "./send/api.sync.service";
 import {DictionaryService} from "./dictionary.service";
 import {map, switchMap} from "rxjs/operators";
+import {ApiService} from "../../security/service/api.service";
 
 @Injectable({
     providedIn: 'root',
@@ -15,11 +16,10 @@ import {map, switchMap} from "rxjs/operators";
 export class WordService {
     public wordLinksChange = new Subject();
 
-    constructor(private sendService: SyncApiService, private dictionaryService: DictionaryService) {
-        /* this.dictionary = new Dictionary(1, 'test');
-         this.addSimpleWordLink("world", "мир");
-         this.addSimpleWordLink("tree", "дерево");
-         this.addWordLink(["key"], ["источник", "ключ"]);*/
+    constructor(private sendService: SyncApiService,
+                private dictionaryService: DictionaryService,
+                private api: ApiService) {
+
     }
 
     private static getWord(dictionary: Dictionary, text: string, isFrom: boolean) {
@@ -45,11 +45,6 @@ export class WordService {
         link.from.forEach(ref => from.push(ref.text));
         link.to.forEach(ref => to.push(ref.text));
         this.addWordLink(from, to);
-    }
-
-
-    private addSimpleWordLink(from: string, to: string) {
-        this.addWordLink([from], [to]);
     }
 
     getWords(sort: string, asc: boolean, page: number, pageSize: number): Observable<ResponsePagingWrapper<WordLink>> {
@@ -88,4 +83,11 @@ export class WordService {
     }
 
 
+    translate(from: string) {
+        return this.api.get(ApiService.api_path + '/translate', {from: from}).pipe(
+            switchMap<Observable<any>, string[]>((r: Observable<any>) => {
+                return [];
+            })
+        );
+    }
 }

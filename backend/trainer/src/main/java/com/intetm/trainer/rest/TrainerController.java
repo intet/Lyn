@@ -8,6 +8,7 @@ import com.intetm.trainer.rest.wrapper.AttemptRequest;
 import com.intetm.trainer.rest.wrapper.LinkRequest;
 import com.intetm.trainer.service.DictionaryService;
 import com.intetm.trainer.service.SecurityService;
+import com.intetm.trainer.service.TranslateService;
 import com.intetm.util.entity.EditMode;
 import com.intetm.util.entity.EditResult;
 import com.intetm.util.entity.ResponseEditWrapper;
@@ -19,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -39,11 +41,13 @@ public class TrainerController {
     public static final Gson GSON = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     private final DictionaryService dictionaryService;
     private final SecurityService securityService;
+    private final TranslateService translateService;
     private static final Logger LOG = LoggerFactory.getLogger(TrainerController.class);
     @Autowired
-    public TrainerController(DictionaryService dictionaryService, SecurityService securityService) {
+    public TrainerController(DictionaryService dictionaryService, SecurityService securityService, TranslateService translateService) {
         this.dictionaryService = dictionaryService;
         this.securityService = securityService;
+        this.translateService = translateService;
     }
 /*
 
@@ -109,4 +113,10 @@ public class TrainerController {
     public Dictionary getDefaultDictionary(Principal principal) {
         return dictionaryService.getDefaultDictionary(principal.getName());
     }
+
+    @RequestMapping(method = GET, value = "/translate")
+    public String[] translate(@RequestParam("from") String from, Principal principal) throws Exception {
+        return translateService.translate(from, principal.getName());
+    }
+
 }

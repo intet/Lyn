@@ -1,0 +1,9 @@
+<div class="loading-shade" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!isLoading">
+    <mat-form-field>
+        <textarea placeholder="текст для чтения" matInput [(ngModel)]="text"></textarea>
+    </mat-form-field>
+    <div (click)="onSelect()">{{text}}</div>
+</div>
