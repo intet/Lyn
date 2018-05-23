@@ -47,6 +47,7 @@ public class YandexDictionaryService {
 
             Map<WordType, List<String>> result = new HashMap<>();
             for (Def def : dicResult.def) {
+                if (def.pos == null) continue;
                 List<String> words = result.get(def.pos);
                 if (words == null) {
                     words = new ArrayList<>();

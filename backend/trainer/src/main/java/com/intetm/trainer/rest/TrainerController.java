@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.intetm.model.Dictionary;
 import com.intetm.model.Word;
+import com.intetm.model.WordType;
 import com.intetm.trainer.rest.wrapper.AttemptRequest;
 import com.intetm.trainer.rest.wrapper.LinkRequest;
 import com.intetm.trainer.service.DictionaryService;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -115,7 +117,7 @@ public class TrainerController {
     }
 
     @RequestMapping(method = GET, value = "/translate")
-    public String[] translate(@RequestParam("from") String from, Principal principal) throws Exception {
+    public Map<WordType, List<String>> translate(@RequestParam("from") String from, Principal principal) throws Exception {
         return translateService.translate(from, principal.getName());
     }
 

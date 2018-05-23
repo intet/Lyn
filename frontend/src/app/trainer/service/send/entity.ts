@@ -43,3 +43,11 @@ export interface EditResult<P> {
 export enum Mode {
     ADD, EDIT, REMOVE
 }
+
+export interface TranslateResult {
+    noun: string[];//Существительное
+    verb: string[];//Глагол
+    adjective: string[]; //Прилагательное
+    adverb: string[]; //Наречие
+    pronoun: string[];
+}

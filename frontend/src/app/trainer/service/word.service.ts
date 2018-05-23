@@ -9,6 +9,7 @@ import {DictionaryService} from "./dictionary.service";
 import {map, switchMap} from "rxjs/operators";
 import {ApiService} from "../../security/service/api.service";
 import {RowLink} from "../component/word/add/list/list.word.component";
+import {TranslateResult} from "./send/entity";
 
 @Injectable({
     providedIn: 'root',
@@ -83,11 +84,7 @@ export class WordService {
     }
 
 
-    translate(from: string) {
-        return this.api.get(ApiService.api_path + '/translate', {from: from}).pipe(
-            switchMap<Observable<any>, string[]>((r: Observable<any>) => {
-                return [];
-            })
-        );
+    translate(from: string): Observable<TranslateResult> {
+        return this.api.get(ApiService.api_path + '/translate', {from: from});
     }
 }

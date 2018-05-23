@@ -2,6 +2,7 @@ import {Component, Inject, OnInit, ViewChild} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {WordService} from "../../../service/word.service";
 import {ListWordComponent, Row, RowLink} from "./list/list.word.component";
+import {TranslateResult} from "../../../service/send/entity";
 
 @Component({
     selector: 'add-word',
@@ -21,11 +22,11 @@ export class WordAddComponent implements OnInit {
         this.link = new RowLink();
         if (data && data.from) {
             this.link.from[0].text = data.from;
-            this.wordService.translate(data.from).subscribe((to: string[]) => {
-                if (!to || to.length == 0)
+            this.wordService.translate(data.from).subscribe((result: TranslateResult) => {
+                if (!result || result.noun.length == 0)
                     return;
                 this.link.to = [];
-                for (let word of to) {
+                for (let word of result.noun) {
                     this.link.to.push(new Row(word));
                 }
             });

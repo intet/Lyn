@@ -8,7 +8,9 @@ public enum WordType {
     VERB,//Глагол
     ADJECTIVE, //Прилагательное
     ADVERB, //Наречие
-    PRONOUN; //Местоимение
+    PRONOUN, //Местоимение
+    NUMERAL, //Числительное
+    PARTICIPLE; //Причастие
 
     @JsonCreator
     public static WordType fromString(String key) {
