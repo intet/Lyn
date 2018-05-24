@@ -13,6 +13,7 @@ import {RowLink} from "../../word/add/list/list.word.component";
 export class ReaderInputComponent implements OnInit {
     public isLoading: boolean = false;
     public text: string;
+    public textDiv: string;
 
     constructor(private dialog: MatDialog, private wordService: WordService) {
     }
@@ -29,6 +30,10 @@ export class ReaderInputComponent implements OnInit {
         dialogRef.afterClosed().subscribe((result: RowLink) => {
 
         });
+    }
+
+    onRead() {
+        this.textDiv = this.text.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 }
 

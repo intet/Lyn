@@ -3,7 +3,7 @@
 </div>
 <div *ngIf="!isLoading">
     <mat-form-field>
-        <textarea placeholder="текст для чтения" matInput [(ngModel)]="text"></textarea>
+        <textarea placeholder="текст для чтения" matInput [(ngModel)]="text" (change)="onRead()"></textarea>
     </mat-form-field>
-    <div (click)="onSelect()">{{text}}</div>
+    <div (click)="onSelect()" innerHTML="{{textDiv}}"></div>
 </div>
