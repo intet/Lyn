@@ -52,7 +52,7 @@ export class WordService {
         this.addWordLink(from, to);
     }
 
-    getWords(sort: string, asc: boolean, page: number, pageSize?: number = 20): Observable<ResponsePagingWrapper<WordLink>> {
+    getWords(sort: string, asc: boolean, page: number, pageSize: number = 20): Observable<ResponsePagingWrapper<WordLink>> {
         return this.dictionaryService.getDictionary()
             .pipe<Dictionary, ResponsePagingWrapper<WordLink>>(
                 switchMap((dict: Dictionary) => {

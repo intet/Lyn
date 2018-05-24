@@ -2,8 +2,26 @@
     <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="!isLoading">
-    <mat-form-field>
-        <textarea placeholder="текст для чтения" matInput [(ngModel)]="text" (change)="onRead()"></textarea>
-    </mat-form-field>
+    <mat-expansion-panel #panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Текст для чтения
+            </mat-panel-title>
+            <mat-panel-description>
+                Вставьте тект который будете читать
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="full-width">
+            <textarea rows="5" placeholder="текст" matInput [(ngModel)]="text" (change)="onRead()"></textarea>
+
+        </mat-form-field>
+        <button mat-button *ngIf="text" aria-label="Сохранить" (click)="panel.close(); onRead()">
+            Сохранить
+        </button>
+        <button mat-button *ngIf="text" aria-label="Очистить" (click)="text=''; onRead()">
+            Очистить
+        </button>
+    </mat-expansion-panel>
     <div (click)="onSelect()" innerHTML="{{textDiv}}"></div>
 </div>
