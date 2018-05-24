@@ -1,4 +1,6 @@
 <div *ngFor="let word of words; let isLast=last">
+
+    <mat-checkbox *ngIf="isSelectMode()" class="example-margin"></mat-checkbox>
     <mat-form-field>
         <input matInput [(ngModel)]="word.text" (change)="afterChange()">
     </mat-form-field>

@@ -6,9 +6,8 @@ import {Component, Input, OnInit} from "@angular/core";
     styleUrls: ['./list.word.component.css']
 })
 export class ListWordComponent implements OnInit {
-    @Input()
-    words: Row[];
-
+    @Input() words: Row[];
+    @Input() mode: WordListMode = WordListMode.NORMAL;
     constructor() {
     }
 
@@ -19,6 +18,10 @@ export class ListWordComponent implements OnInit {
     public afterChange() {
         if (this.words[this.words.length - 1].text !== '')
             this.words.push(new Row(''));
+    }
+
+    isSelectMode() {
+        return this.mode == WordListMode.SELECT;
     }
 }
 
@@ -38,4 +41,8 @@ export class Row {
     constructor(text?: string) {
         this.text = text;
     }
+}
+
+export enum WordListMode {
+    NORMAL, SELECT
 }
