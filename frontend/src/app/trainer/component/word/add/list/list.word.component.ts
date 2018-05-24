@@ -37,7 +37,7 @@ export class RowLink {
 
 export class Row {
     text: string = '';
-
+    selected: boolean = true;
     constructor(text?: string) {
         this.text = text;
     }

@@ -43,19 +43,26 @@ export class WordService {
     createLink(link: RowLink) {
         let from: string[] = [];
         let to: string[] = [];
-        link.from.forEach(ref => from.push(ref.text));
-        link.to.forEach(ref => to.push(ref.text));
+        link.from.forEach(ref => {
+            if (ref.selected) from.push(ref.text)
+        });
+        link.to.forEach(ref => {
+            if (ref.selected) to.push(ref.text)
+        });
         this.addWordLink(from, to);
     }
 
-    getWords(sort: string, asc: boolean, page: number, pageSize: number): Observable<ResponsePagingWrapper<WordLink>> {
+    getWords(sort: string, asc: boolean, page: number, pageSize?: number = 20): Observable<ResponsePagingWrapper<WordLink>> {
         return this.dictionaryService.getDictionary()
             .pipe<Dictionary, ResponsePagingWrapper<WordLink>>(
                 switchMap((dict: Dictionary) => {
                     return dict.sortLinks(sort, asc);
                 }),
                 map((d: Dictionary) => {
-                        return new ResponsePagingWrapper(d.wordLinks.length, d.wordLinks);
+                    let start = pageSize * page;
+                    let end = (start + pageSize);
+                    if (end > d.wordLinks.length) end = d.wordLinks.length;
+                    return new ResponsePagingWrapper(d.wordLinks.length, d.wordLinks.slice(start, end));
                     }
                 ))
             ;

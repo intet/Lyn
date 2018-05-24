@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit, ViewChild} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {WordService} from "../../../service/word.service";
-import {ListWordComponent, Row, RowLink} from "./list/list.word.component";
+import {ListWordComponent, Row, RowLink, WordListMode} from "./list/list.word.component";
 import {TranslateResult} from "../../../service/send/entity";
 
 @Component({
@@ -15,7 +15,7 @@ export class WordAddComponent implements OnInit {
     public fromComponent: ListWordComponent;
     @ViewChild('toComponent')
     public toComponent: ListWordComponent;
-
+    public mode: WordListMode;
     constructor(public dialogRef: MatDialogRef<WordAddComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any,
                 private wordService: WordService) {
@@ -30,6 +30,10 @@ export class WordAddComponent implements OnInit {
                     this.link.to.push(new Row(word));
                 }
             });
+            this.mode = WordListMode.SELECT;
+        }
+        else {
+            this.mode = WordListMode.NORMAL;
         }
     }
 
