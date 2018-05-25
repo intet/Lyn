@@ -62,7 +62,7 @@ export class WordAddComponent implements OnInit {
         this.link.to = [];
         for (let word of wordLink.from) {
             let row = new Row(word.text);
-            this.link.to.push(row);
+            this.link.from.push(row);
         }
         for (let word of wordLink.to) {
             let row = new Row(word.text);
