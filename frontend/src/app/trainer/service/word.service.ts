@@ -41,17 +41,26 @@ export class WordService {
     }
 
     createLink(link: RowLink) {
-        let from: string[] = [];
-        let to: string[] = [];
-        link.from.forEach(ref => {
-            if (ref.selected) from.push(ref.text)
-        });
-        link.to.forEach(ref => {
-            if (ref.selected) to.push(ref.text)
-        });
+        let to = this.getTextWord(link.to);
+        let from = this.getTextWord(link.from);
         this.addWordLink(from, to);
     }
 
+
+    updateLink(wordLink: WordLink, link: RowLink) {
+        let to = this.getTextWord(link.to);
+        let from = this.getTextWord(link.from);
+        this.updateWordLink(wordLink, from, to);
+
+    }
+
+    private getTextWord(arr: Row[]) {
+        let to: string[] = [];
+        arr.forEach(ref => {
+            if (ref.selected) to.push(ref.text)
+        });
+        return to;
+    }
     getWords(sort: string, asc: boolean, page: number, pageSize: number = 20): Observable<ResponsePagingWrapper<WordLink>> {
         return this.dictionaryService.getDictionary()
             .pipe<Dictionary, ResponsePagingWrapper<WordLink>>(
@@ -66,6 +75,28 @@ export class WordService {
                     }
                 ))
             ;
+    }
+
+    private updateWordLink(link: WordLink, from: string[], to: string[]) {
+        this.dictionaryService.getDictionary().subscribe((dictionary: Dictionary) => {
+            const fromWords: Word[] = [];
+            const toWords: Word[] = [];
+            for (const text of from) {
+                let word = WordService.getWord(dictionary, text, true);
+                if (word != null)
+                    fromWords.push(word);
+            }
+            for (const text of to) {
+                let word = WordService.getWord(dictionary, text, false);
+                if (word != null)
+                    toWords.push(word);
+            }
+
+            //TODO Записать результат в линк
+            this.sendService.addLink(dictionary, link);
+            dictionary.addWord(link);
+            this.wordLinksChange.next();
+        });
     }
 
     private addWordLink(from: string[], to: string[]) {
@@ -94,4 +125,5 @@ export class WordService {
     translate(from: string): Observable<TranslateResult> {
         return this.api.get(ApiService.api_path + '/translate', {from: from});
     }
+
 }

@@ -76,7 +76,12 @@ export class WordAddComponent implements OnInit {
     }
 
     save() {
-        this.wordService.createLink(this.link);
+        if (this.wordLink == null) {
+            this.wordService.createLink(this.link);
+        }
+        else {
+            this.wordService.updateLink(this.wordLink, this.link);
+        }
         this.dialogRef.close(this.link);
     }
 
