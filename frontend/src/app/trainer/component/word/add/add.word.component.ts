@@ -26,8 +26,15 @@ export class WordAddComponent implements OnInit {
                 if (!result || result.noun.length == 0)
                     return;
                 this.link.to = [];
+                let first = true;
                 for (let word of result.noun) {
-                    this.link.to.push(new Row(word));
+                    let row = new Row(word);
+                    if (first) {
+                        first = false;
+                    } else {
+                        row.selected = false;
+                    }
+                    this.link.to.push(row);
                 }
             });
             this.mode = WordListMode.SELECT;

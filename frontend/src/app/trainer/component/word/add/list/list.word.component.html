@@ -1,7 +1,11 @@
-<div *ngFor="let word of words; let isLast=last">
-    <mat-checkbox *ngIf="isSelectMode()">{{word.text}}</mat-checkbox>
-    <mat-form-field [(ngModel)]="word.selected" *ngIf="!isSelectMode()">
+<div *ngFor="let word of words; let isLast=last" class="row">
+    <div class="col-1, check-center">
+        <mat-checkbox [(ngModel)]="word.selected" *ngIf="isSelectMode()"></mat-checkbox>
+    </div>
+    <div class="col-10">
+        <mat-form-field>
         <input matInput [(ngModel)]="word.text" (change)="afterChange()">
     </mat-form-field>
+    </div>
     <br *ngIf="!isLast"/>
 </div>

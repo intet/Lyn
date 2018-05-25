@@ -25,3 +25,7 @@ body {
 .full-width {
     width: 100%;
 }
+
+.check-center {
+    margin-top: 20px;
+}
