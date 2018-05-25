@@ -4,13 +4,13 @@ import {Word, WordLink} from "../entity/word";
 import {timer} from "rxjs/index";
 import {ApiService} from "../../../security/service/api.service";
 import {Dictionary} from "../entity/dictionary";
+import {IdGenerator} from "./IdGenerator";
 
 @Injectable({
     providedIn: 'root',
 })
 export class SyncApiService {
     private timer;
-    private static transportId: number = -1;
 
     constructor(private api: ApiService) {
         this.timer = timer(10000, 10000);
@@ -18,10 +18,6 @@ export class SyncApiService {
     }
 
     public sync: number = 0;
-    public static generateTransportId(): number {
-        SyncApiService.transportId -= 1;
-        return SyncApiService.transportId;
-    }
 
     private requests = new Map<string, Map<any, ItemForSend<any, any>>>();
 
@@ -52,7 +48,7 @@ export class SyncApiService {
     }
 
     addWordAttempt(word: Word, valid: boolean) {
-        let attemptRequest = new AttemptRequest(null, SyncApiService.generateTransportId());
+        let attemptRequest = new AttemptRequest(null, IdGenerator.generateTransportId());
         if (valid) {
             attemptRequest.countSuccess += 1;
         }

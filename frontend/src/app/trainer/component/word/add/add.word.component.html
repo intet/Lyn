@@ -9,6 +9,9 @@
         <list-word #toComponent [words]=link.to [mode]="mode"></list-word>
     </div>
 </div>
+<div *ngIf="isShowYandex()">
+    <a target="_blank" href="https://tech.yandex.ru/dictionary/">«Реализовано с помощью сервиса «Яндекс.Словарь»</a>
+</div>
 <div mat-dialog-actions>
     <button mat-button (click)="save()" cdkFocusInitial>Добавить</button>
     <button mat-button mat-dialog-close>Отмена</button>

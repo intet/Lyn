@@ -1,4 +1,4 @@
-import {SyncApiService} from "../send/api.sync.service";
+import {IdGenerator} from "../send/IdGenerator";
 
 export class WordLink {
     id: number;
@@ -10,7 +10,7 @@ export class WordLink {
         this.id = null;
         this.from = form;
         this.to = to;
-        this.transportId = SyncApiService.generateTransportId();
+        this.transportId = IdGenerator.generateTransportId();
     }
 }
 
@@ -30,7 +30,7 @@ export class Word {
         this.id = null;
         this.text = text;
         this.created = new Date();
-        this.transportId = SyncApiService.generateTransportId();
+        this.transportId = IdGenerator.generateTransportId();
     }
 
     static update(w1: Word, w2: Word) {

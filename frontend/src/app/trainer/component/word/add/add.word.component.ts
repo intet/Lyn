@@ -45,4 +45,8 @@ export class WordAddComponent implements OnInit {
         this.wordService.createLink(this.link);
         this.dialogRef.close(this.link);
     }
+
+    isShowYandex() {
+        return this.mode == WordListMode.SELECT;
+    }
 }
