@@ -44,5 +44,5 @@ export class Row {
 }
 
 export enum WordListMode {
-    NORMAL, SELECT
+    NORMAL, SELECT, EDIT
 }

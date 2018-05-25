@@ -17,7 +17,7 @@ export class WordLink {
 export class Word {
     id: number;
     transportId: number;
-    text: String;
+    public text: String;
     created: Date;
     language: number;
     lastAttempt: Date;

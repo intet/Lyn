@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
+import {MatDialog, MatDialogConfig, MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
 import {merge} from 'rxjs/observable/merge';
 import {map} from 'rxjs/operators/map';
 import {startWith} from 'rxjs/operators/startWith';
@@ -9,6 +9,8 @@ import {catchError} from 'rxjs/operators/catchError';
 import {WordService} from "../../../service/word.service";
 import {ResponsePagingWrapper} from "../../../../shared/util/entity";
 import {WordLink} from "../../../service/entity/word";
+import {WordAddComponent} from "../add/add.word.component";
+import {RowLink} from "../add/list/list.word.component";
 
 @Component({
     selector: 'word-grid',
@@ -23,7 +25,7 @@ export class WordGridComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(private wordService: WordService) {
+    constructor(private wordService: WordService, private dialog: MatDialog) {
     }
 
     ngOnInit() {
@@ -52,5 +54,14 @@ export class WordGridComponent implements OnInit {
                     return observableOf([]);
                 })
             ).subscribe(data => this.dataSource.data = data);
+    }
+
+    edit(link: WordLink) {
+        let config = new MatDialogConfig();
+        config.data = {link: link};
+        let dialogRef = this.dialog.open(WordAddComponent, config);
+        dialogRef.afterClosed().subscribe((result: RowLink) => {
+
+        });
     }
 }
