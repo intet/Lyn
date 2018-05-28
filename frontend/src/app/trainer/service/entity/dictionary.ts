@@ -6,13 +6,13 @@ import {DictionaryResult} from "../dictionary.service";
 
 export class Dictionary {
     readonly id: Number;
-    readonly name: String;
+    readonly name: string;
     readonly from: Language;
     readonly to: Language;
     readonly wordMapFrom: Map<string, Word>;
     readonly wordMapTo: Map<string, Word>;
     readonly wordLinks: WordLink[];
-    sort: String;
+    sort: string;
     asc: boolean;
 
     constructor(r: DictionaryResult) {
@@ -35,7 +35,7 @@ export class Dictionary {
         }
     }
 
-    sortLinks(sort: String, asc: boolean): Observable<Dictionary> {
+    sortLinks(sort: string, asc: boolean): Observable<Dictionary> {
         if (this.sort == sort && this.asc == asc) {
             return observableOf(this);
         }

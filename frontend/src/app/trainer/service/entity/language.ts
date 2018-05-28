@@ -1,7 +1,7 @@
 export class Language {
     readonly id: number;
-    readonly code: String;
-    readonly name: String;
+    readonly code: string;
+    readonly name: string;
 
     constructor(id, code, name) {
         this.id = id;

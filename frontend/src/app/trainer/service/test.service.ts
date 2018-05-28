@@ -29,7 +29,7 @@ export class TestService {
         )
     }
 
-    testWord(attempt: TestWordAttempt, input: String) {
+    testWord(attempt: TestWordAttempt, input: string) {
         let valid = this.isValid(attempt, input);
         this.sendService.addWordAttempt(attempt.word, valid);
         return valid;
@@ -39,7 +39,7 @@ export class TestService {
         this.test.moveNext();
     }
 
-    private isValid(attempt: TestWordAttempt, input: String) {
+    private isValid(attempt: TestWordAttempt, input: string) {
         const text = input.trim().toLocaleLowerCase();
         const words = attempt.from ? attempt.link.to : attempt.link.from;
         for (let word of words) {

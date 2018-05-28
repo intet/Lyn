@@ -10,7 +10,7 @@ import {Test} from "../../../service/entity/test";
 })
 export class WordStepComponent implements OnInit {
     attempt: TestWordAttempt;
-    input: String;
+    input: string;
     invalid: boolean;
 
     constructor(private testService: TestService) {

@@ -17,7 +17,7 @@ export class WordLink {
 export class Word {
     id: number;
     transportId: number;
-    public text: String;
+    public text: string;
     created: Date;
     language: number;
     lastAttempt: Date;
@@ -26,7 +26,7 @@ export class Word {
     countSuccess: number = 0;
     countFail: number = 0;
 
-    constructor(text: String) {
+    constructor(text: string) {
         this.id = null;
         this.text = text;
         this.created = new Date();

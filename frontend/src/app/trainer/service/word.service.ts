@@ -8,7 +8,7 @@ import {SyncApiService} from "./send/api.sync.service";
 import {DictionaryService} from "./dictionary.service";
 import {map, switchMap} from "rxjs/operators";
 import {ApiService} from "../../security/service/api.service";
-import {RowLink} from "../component/word/add/list/list.word.component";
+import {Row, RowLink} from "../component/word/add/list/list.word.component";
 import {TranslateResult} from "./send/entity";
 
 @Injectable({
