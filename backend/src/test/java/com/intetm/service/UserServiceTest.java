@@ -2,9 +2,7 @@ package com.intetm.service;
 
 import com.intetm.AbstractTest;
 import com.intetm.security.service.UserService;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
 
 /**
  * Created by fan.jin on 2017-04-04.
@@ -14,7 +12,7 @@ public class UserServiceTest extends AbstractTest {
   @Autowired
   UserService userService;
 
-  @Test(expected = AccessDeniedException.class)
+/*  @Test(expected = AccessDeniedException.class)
   public void testFindAllWithoutUser() throws AccessDeniedException {
     userService.findAll();
   }
@@ -64,6 +62,6 @@ public class UserServiceTest extends AbstractTest {
   public void testFindByUsernameWithAdmin() throws AccessDeniedException {
     mockAuthenticatedUser(buildTestAdmin());
     userService.findByUsername("user");
-  }
+  }*/
 
 }
