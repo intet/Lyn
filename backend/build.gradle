@@ -1,3 +1,8 @@
+plugins {
+    id "org.springframework.boot" version "1.5.10.RELEASE"
+    id 'io.franzbecker.gradle-lombok' version '1.11'
+    id 'java'
+}
 apply plugin: 'java'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -52,4 +57,17 @@ subprojects {
         compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1'
 
     }
+}
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["${project(':frontend').projectDir}/dist", "$projectDir/src/main/resources"]
+        }
+    }
+}
+processResources {
+    dependsOn ":frontend:buildAngular"
+}
+springBoot {
+    executable = true
 }
