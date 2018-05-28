@@ -10,7 +10,7 @@ task buildAngular(type:Exec) {
   group = BasePlugin.BUILD_GROUP
   // ng doesn't exist as a file in windows -> ng.cmd
   if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
-    commandLine "ng.cmd", "build", '--prod'
+    commandLine "npm.cmd", "build"
   } else {
     commandLine "ng", "build", '--prod'
   }
