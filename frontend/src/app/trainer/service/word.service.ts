@@ -87,22 +87,20 @@ export class WordService {
 
     private updateWordLink(link: WordLink, from: string[], to: string[]) {
         this.dictionaryService.getDictionary().subscribe((dictionary: Dictionary) => {
-            const fromWords: Word[] = [];
-            const toWords: Word[] = [];
+            link.from.length = 0;
+            link.to.length = 0;
+
             for (const text of from) {
                 let word = WordService.getWord(dictionary, text, true);
                 if (word != null)
-                    fromWords.push(word);
+                    link.from.push(word);
             }
             for (const text of to) {
                 let word = WordService.getWord(dictionary, text, false);
                 if (word != null)
-                    toWords.push(word);
+                    link.to.push(word);
             }
-
-            //TODO Записать результат в линк
             this.sendService.addLink(dictionary, link);
-            dictionary.addWord(link);
             this.wordLinksChange.next();
         });
     }
