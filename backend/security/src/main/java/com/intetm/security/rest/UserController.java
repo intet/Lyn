@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -46,14 +44,14 @@ public class UserController {
     public List<User> loadAll() {
         return this.userService.findAll();
     }
-
+/*
     @RequestMapping(method = GET, value = "/user/reset-credentials")
     public ResponseEntity<Map> resetCredentials() {
         this.userService.resetCredentials();
         Map<String, String> result = new HashMap<>();
         result.put("result", "success");
         return ResponseEntity.accepted().body(result);
-    }
+    }*/
 
 
     @RequestMapping(method = POST, value = "/signup")
