@@ -1,15 +1,14 @@
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Observable";
 import {Word, WordLink} from "./entity/word";
 import {ResponsePagingWrapper} from "../../shared/util/entity";
 import {Dictionary} from "./entity/dictionary";
-import {Subject} from "rxjs/Subject";
 import {SyncApiService} from "./send/api.sync.service";
 import {DictionaryService} from "./dictionary.service";
 import {map, switchMap} from "rxjs/operators";
 import {ApiService} from "../../security/service/api.service";
 import {Row, RowLink} from "../component/word/add/list/list.word.component";
 import {TranslateResult} from "./send/entity";
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
     providedIn: 'root',

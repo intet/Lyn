@@ -1,16 +1,12 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {MatDialog, MatDialogConfig, MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
-import {merge} from 'rxjs/observable/merge';
-import {map} from 'rxjs/operators/map';
-import {startWith} from 'rxjs/operators/startWith';
-import {switchMap} from 'rxjs/operators/switchMap';
-import {of as observableOf} from 'rxjs/observable/of';
-import {catchError} from 'rxjs/operators/catchError';
 import {WordService} from "../../../service/word.service";
 import {ResponsePagingWrapper} from "../../../../shared/util/entity";
 import {WordLink} from "../../../service/entity/word";
 import {WordAddComponent} from "../add/add.word.component";
 import {RowLink} from "../add/list/list.word.component";
+import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import {merge, of as observableOf} from 'rxjs';
 
 @Component({
     selector: 'word-grid',

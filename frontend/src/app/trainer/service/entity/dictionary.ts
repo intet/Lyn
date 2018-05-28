@@ -1,7 +1,6 @@
 import {Language} from "./language";
 import {Word, WordLink} from "./word";
-import {Observable} from "rxjs/Observable";
-import {of as observableOf} from 'rxjs/observable/of';
+import {Observable, of as observableOf} from 'rxjs';
 import {DictionaryResult} from "../dictionary.service";
 
 export class Dictionary {

@@ -1,12 +1,11 @@
 import {Injectable} from "@angular/core";
 import {SyncApiService} from "./send/api.sync.service";
 import {DictionaryService} from "./dictionary.service";
-import {Observable} from "rxjs/Observable";
 import {Test} from "./entity/test";
 import {map} from "rxjs/operators";
 import {Dictionary} from "./entity/dictionary";
 import {TestParam, TestWordAttempt} from "./entity/test-param";
-import {of as observableOf} from 'rxjs/observable/of';
+import {Observable, of as observableOf} from 'rxjs';
 
 @Injectable({
     providedIn: 'root',

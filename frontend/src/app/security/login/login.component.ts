@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DisplayMessage} from '../../shared/models/display-message';
 import {AuthService, UserService} from '../service';
 import {Subject} from 'rxjs';
+import {delay, takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -42,8 +43,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.route.params
-    .takeUntil(this.ngUnsubscribe)
+      this.route.params.pipe(
+          takeUntil(this.ngUnsubscribe))
     .subscribe((params: DisplayMessage) => {
       this.notification = params;
     });
@@ -83,9 +84,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.notification = undefined;
     this.submitted = true;
 
-    this.authService.login(this.form.value)
+      this.authService.login(this.form.value).pipe(
     // show me the animation
-    .delay(1000)
+          delay(1000))
     .subscribe(data => {
       this.userService.getMyInfo().subscribe();
       this.router.navigate([this.returnUrl]);

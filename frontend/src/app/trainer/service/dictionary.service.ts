@@ -1,11 +1,10 @@
 import {Injectable} from "@angular/core";
-import {of as observableOf} from 'rxjs/observable/of';
 import {Dictionary} from "./entity/dictionary";
-import {Subject} from "rxjs/Subject";
 import {ApiService} from "../../security/service/api.service";
-import {Observable} from "rxjs/Observable";
 import {Language} from "./entity/language";
 import {WordLink} from "./entity/word";
+import {Observable, of as observableOf, Subject} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -19,11 +18,11 @@ export class DictionaryService {
     }
 
     loadDefault(): Observable<Dictionary> {
-        return this.api.get(ApiService.api_path + '/getDefaultDictionary')
-            .map<any, Dictionary>((result: DictionaryResult) => {
+        return this.api.get(ApiService.api_path + '/getDefaultDictionary').pipe(
+            map<any, Dictionary>((result: DictionaryResult) => {
                 this.dictionary = new Dictionary(result);
                 return this.dictionary;
-            });
+            }));
     }
 
     public getDictionary(): Observable<Dictionary> {
