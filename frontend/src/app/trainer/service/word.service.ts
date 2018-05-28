@@ -77,6 +77,14 @@ export class WordService {
             ;
     }
 
+    public deleteWordLink(link: WordLink) {
+        this.dictionaryService.getDictionary().subscribe((dictionary: Dictionary) => {
+            this.sendService.deleteLink(dictionary, link);
+            dictionary.deleteWord(link);
+            this.wordLinksChange.next();
+        });
+    }
+
     private updateWordLink(link: WordLink, from: string[], to: string[]) {
         this.dictionaryService.getDictionary().subscribe((dictionary: Dictionary) => {
             const fromWords: Word[] = [];
@@ -98,6 +106,7 @@ export class WordService {
             this.wordLinksChange.next();
         });
     }
+
 
     private addWordLink(from: string[], to: string[]) {
         this.dictionaryService.getDictionary().subscribe((dictionary: Dictionary) => {

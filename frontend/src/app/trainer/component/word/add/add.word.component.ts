@@ -85,6 +85,14 @@ export class WordAddComponent implements OnInit {
         this.dialogRef.close(this.link);
     }
 
+    delete() {
+        this.wordService.deleteWordLink(this.wordLink);
+    }
+
+    isEditMode() {
+        return this.mode == WordListMode.EDIT;
+    }
+
     isShowYandex() {
         return this.mode == WordListMode.SELECT;
     }

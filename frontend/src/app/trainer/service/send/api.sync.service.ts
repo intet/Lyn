@@ -47,6 +47,18 @@ export class SyncApiService {
         );
     }
 
+    deleteLink(dictionary: Dictionary, link: WordLink) {
+        this.addRequest('/saveLinks', link.transportId, link, dictionary,
+            ((link: WordLink, dictionary: Dictionary) => {
+                return new LinkRequest(Mode.REMOVE, link.id, link.transportId, dictionary.id, link.from, link.to)
+            }),
+            ((item: ItemForSend<WordLink, Dictionary>, link: WordLink) => {
+                item.object = link;
+            }),
+            (() => {
+            })
+        );
+    }
     addWordAttempt(word: Word, valid: boolean) {
         let attemptRequest = new AttemptRequest(null, IdGenerator.generateTransportId());
         if (valid) {

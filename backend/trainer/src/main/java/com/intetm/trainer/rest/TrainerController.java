@@ -87,6 +87,11 @@ public class TrainerController {
                 if (linkRequest.mode == EditMode.ADD || linkRequest.mode == EditMode.EDIT) {
                     Map<Long, EditResult<Long, Object>> wordResult = dictionaryService.addLink(linkRequest);
                     response.putSuccess(linkRequest.transportId, linkRequest.id, null, wordResult);
+                } else if (linkRequest.mode == EditMode.REMOVE) {
+                    if (linkRequest.id != null) {
+                        dictionaryService.deleteLink(linkRequest);
+                    }
+                    response.putSuccess(linkRequest.transportId);
                 }
             } catch (Exception ex) {
                 LOG.error(ex.getMessage(), ex);

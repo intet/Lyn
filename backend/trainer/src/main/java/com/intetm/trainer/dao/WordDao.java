@@ -92,4 +92,8 @@ public class WordDao {
         wordRepository.save(word);
         return word;
     }
+
+    public void deleteLink(LinkRequest linkRequest) {
+        wordLinkRepository.delete(linkRequest.id);
+    }
 }

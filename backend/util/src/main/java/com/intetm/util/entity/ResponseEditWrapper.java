@@ -9,6 +9,9 @@ public class ResponseEditWrapper<T, P> {
     @Expose
     Map<T, EditResult<T, P>> rows = new HashMap<>();
 
+    public void putSuccess(T externalKey) {
+        putSuccess(externalKey, null, null, null);
+    }
     public void putSuccess(T externalKey, T internalKey) {
         putSuccess(externalKey, internalKey, null, null);
     }
@@ -32,4 +35,5 @@ public class ResponseEditWrapper<T, P> {
         result.success = false;
         rows.put(externalKey, result);
     }
+
 }

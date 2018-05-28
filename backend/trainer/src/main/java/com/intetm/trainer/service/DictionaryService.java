@@ -46,4 +46,8 @@ public class DictionaryService {
     public Word syncAttempts(AttemptRequest attemptRequest, String userName) {
         return wordDao.syncAttempts(attemptRequest.id, attemptRequest.countSuccess, attemptRequest.countFail, userName);
     }
+
+    public void deleteLink(LinkRequest linkRequest) {
+        wordDao.deleteLink(linkRequest);
+    }
 }

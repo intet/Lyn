@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Добавление слова</h1>
+<h1 mat-dialog-title>{{isEditMode()?"Изменение слова":"Добавление слова"}}</h1>
 <div class="row">
     <div class="col-6">
         <mat-card-title>Слово</mat-card-title>
@@ -13,6 +13,7 @@
     <a target="_blank" href="https://tech.yandex.ru/dictionary/">«Реализовано с помощью сервиса «Яндекс.Словарь»</a>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="save()" cdkFocusInitial>Добавить</button>
+    <button mat-button (click)="save()" cdkFocusInitial>{{isEditMode()?"Сохранить":"Добавить"}}</button>
+    <button mat-button (click)="delete()" *ngIf="isEditMode()">Удалить</button>
     <button mat-button mat-dialog-close>Отмена</button>
 </div>

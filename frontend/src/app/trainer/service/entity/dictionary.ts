@@ -71,4 +71,11 @@ export class Dictionary {
     addWord(link: WordLink) {
         this.wordLinks.push(link);
     }
+
+    deleteWord(link: WordLink) {
+        const index: number = this.wordLinks.indexOf(link);
+        if (index !== -1) {
+            this.wordLinks.splice(index, 1);
+        }
+    }
 }
