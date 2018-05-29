@@ -15,14 +15,25 @@ export class ListWordComponent implements OnInit {
 
     }
 
-    public afterChange() {
-        if (this.words[this.words.length - 1].text !== '')
-            this.words.push(new Row(''));
+    afterChange() {
+        /*    if (this.words[this.words.length - 1].text !== '')
+                this.addRow();*/
     }
 
     isSelectMode() {
         return this.mode == WordListMode.SELECT;
     }
+
+    addRow() {
+        this.words.push(new Row(''));
+    }
+
+    delete(index: number) {
+        this.words.splice(index, 1);
+        if (this.words.length == 0)
+            this.addRow();
+    }
+
 }
 
 export class RowLink {

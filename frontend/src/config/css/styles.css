@@ -1,6 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 /*@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 */
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+/*
+.material-icons.md-dark { color: rgba(93, 228, 64, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(213, 28, 9, 0.82); }
+
+!* Rules for using icons as white on a dark background. *!
+.material-icons.md-light { color: rgb(104, 99, 255); }
+.material-icons.md-light.md-inactive { color: rgba(44, 181, 177, 0.97);}
+*/
+
+
+
 body {
   margin: 0;
 }

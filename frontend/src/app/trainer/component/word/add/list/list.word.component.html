@@ -1,11 +1,20 @@
-<div *ngFor="let word of words; let isLast=last" class="row">
+<div *ngFor="let word of words; let isLast=last; let i = index" class="row">
     <div class="col-1, check-center">
         <mat-checkbox [(ngModel)]="word.selected" *ngIf="isSelectMode()"></mat-checkbox>
     </div>
-    <div class="col-10">
+    <div class="col-9">
         <mat-form-field>
         <input matInput [(ngModel)]="word.text" (change)="afterChange()">
     </mat-form-field>
     </div>
+    <div class="col-1, check-center" style="z-index: 100">
+        <mat-icon (click)="delete(i)">delete</mat-icon>
+    </div>
     <br *ngIf="!isLast"/>
+</div>
+<div class="row" (click)="addRow()">
+    <div class="col-1">
+        <mat-icon>add</mat-icon>
+    </div>
+    <div class="col-10">добавить слово</div>
 </div>
