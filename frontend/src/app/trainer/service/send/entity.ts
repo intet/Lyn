@@ -49,5 +49,8 @@ export interface TranslateResult {
     verb: string[];//Глагол
     adjective: string[]; //Прилагательное
     adverb: string[]; //Наречие
-    pronoun: string[];
+    pronoun: string[]; //Местоимение
+    numeral: string[]; //Числительное
+    participle: string[]; //Причастие
+    preposition: string[];// Предлог
 }

@@ -41,11 +41,19 @@ export class WordAddComponent implements OnInit {
     private initSelect(from: string) {
         this.link.from[0].text = from;
         this.wordService.translate(from).subscribe((result: TranslateResult) => {
-            if (!result || result.noun.length == 0)
+            if (!result)
                 return;
+            let words = result.noun;
+            if (!words)
+                words = result.verb;
+            if (!words)
+                words = result.adjective;
+            if (!words)
+                return;
+
             this.link.to = [];
             let first = true;
-            for (let word of result.noun) {
+            for (let word of words) {
                 let row = new Row(word);
                 if (first) {
                     first = false;
