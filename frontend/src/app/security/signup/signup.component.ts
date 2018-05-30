@@ -12,7 +12,8 @@ import {delay, takeUntil} from 'rxjs/operators';
     styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit, OnDestroy {
-    title = 'Sign up';
+    title = 'Зарегистрироваться';
+    githubLink = 'https://github.com/intet/Lyn';
     form: FormGroup;
 
     /**
@@ -60,7 +61,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
 
     repository() {
-        //window.location.href = this.githubLink;
+        window.location.href = this.githubLink;
     }
 
     onSubmit() {

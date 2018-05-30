@@ -2,7 +2,7 @@
     <mat-card class="col align-self-center">
 
         <mat-card-subtitle>
-            <h2>Angular Spring Starter</h2>
+            <h2>Lyn</h2>
         </mat-card-subtitle>
 
         <mat-card-title>
@@ -15,12 +15,12 @@
 
             <form *ngIf="!submitted" [formGroup]="form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
                 <mat-form-field>
-                    <input matInput formControlName="username" required placeholder="user/admin">
+                    <input matInput formControlName="username" required placeholder="имя пользователя">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput formControlName="password" required type="password" placeholder="123">
+                    <input matInput formControlName="password" required type="password" placeholder="пароль">
                 </mat-form-field>
-                <button type="submit" [disabled]="!loginForm.form.valid" mat-raised-button color="primary">Login
+                <button type="submit" [disabled]="!loginForm.form.valid" mat-raised-button color="primary">Войти
                 </button>
             </form>
             <br>

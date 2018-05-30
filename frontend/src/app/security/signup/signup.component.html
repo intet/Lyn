@@ -3,7 +3,7 @@
   <mat-card elevation="5" fxFlex>
 
     <mat-card-subtitle>
-      <h2>Angular Spring Starter</h2>
+      <h2>Lyn</h2>
     </mat-card-subtitle>
 
     <mat-card-title>
@@ -16,22 +16,23 @@
 
       <form *ngIf="!submitted" [formGroup]="form" (ngSubmit)="onSubmit()" #signupForm="ngForm">
         <mat-form-field>
-          <label>Username: </label>
+          <label>Пользователь: </label>
           <input matInput formControlName="username" required>
         </mat-form-field>
         <mat-form-field>
-          <label>Password: </label>
+          <label>Пароль: </label>
           <input matInput formControlName="password" required type="password">
         </mat-form-field>
         <mat-form-field>
-          <label>First Name: </label>
+          <label>Имя: </label>
           <input matInput formControlName="firstname">
         </mat-form-field>
         <mat-form-field>
-          <label>Last Name: </label>
+          <label>Фамилия: </label>
           <input matInput formControlName="lastname">
         </mat-form-field>
-        <button type="submit" [disabled]="!signupForm.form.valid" mat-raised-button color="primary">Sign up</button>
+        <button type="submit" [disabled]="!signupForm.form.valid" mat-raised-button color="primary">Зарегистрироваться
+        </button>
       </form>
       <br>
 
@@ -41,7 +42,7 @@
 
       <p>
         <i>Created by
-          <a href="https://github.com/bfwg">Fan Jin</a>
+          <a href="https://github.com/bfwg">Sivodedov Dmitry</a>
         </i>
       </p>
       <p>
