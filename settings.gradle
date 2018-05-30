@@ -20,6 +20,7 @@ include ':backend:security'
 include ':backend:storage'
 include ':backend:trainer'
 include ':backend:util'
+include ':backend:comics'
 
 project(':backend').projectDir = "$rootDir/backend" as File
 project(':frontend').projectDir = "$rootDir/frontend" as File
@@ -33,3 +34,4 @@ findProject(':backend:security')?.name = 'security'
 findProject(':backend:storage')?.name = 'storage'
 findProject(':backend:trainer')?.name = 'trainer'
 findProject(':backend:util')?.name = 'util'
+findProject(':backend:comics')?.name = 'comics'
