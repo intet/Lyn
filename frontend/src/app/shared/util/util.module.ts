@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 import {
     MatAutocompleteModule,
@@ -85,7 +86,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        CommonModule
+        CommonModule,
+        FlexLayoutModule
     ]
 })
 export class UtilModule {

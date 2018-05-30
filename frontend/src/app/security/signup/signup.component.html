@@ -1,57 +1,58 @@
 <div class="content" fxLayout="row" fxLayoutAlign="center">
 
-  <mat-card elevation="5" fxFlex>
+    <mat-card elevation="5" fxFlex>
 
-    <mat-card-subtitle>
-      <h2>Lyn</h2>
-    </mat-card-subtitle>
+        <mat-card-subtitle>
+            <h2>Lyn</h2>
+        </mat-card-subtitle>
 
-    <mat-card-title>
-      <h2>{{ title }}</h2>
-    </mat-card-title>
+        <mat-card-title>
+            <h2>{{ title }}</h2>
+        </mat-card-title>
 
-    <mat-card-content>
+        <mat-card-content>
 
-      <p [class]="notification.msgType" *ngIf="notification">{{notification.msgBody}}</p>
+            <p [class]="notification.msgType" *ngIf="notification">{{notification.msgBody}}</p>
 
-      <form *ngIf="!submitted" [formGroup]="form" (ngSubmit)="onSubmit()" #signupForm="ngForm">
-        <mat-form-field>
-          <label>Пользователь: </label>
-          <input matInput formControlName="username" required>
-        </mat-form-field>
-        <mat-form-field>
-          <label>Пароль: </label>
-          <input matInput formControlName="password" required type="password">
-        </mat-form-field>
-        <mat-form-field>
-          <label>Имя: </label>
-          <input matInput formControlName="firstname">
-        </mat-form-field>
-        <mat-form-field>
-          <label>Фамилия: </label>
-          <input matInput formControlName="lastname">
-        </mat-form-field>
-        <button type="submit" [disabled]="!signupForm.form.valid" mat-raised-button color="primary">Зарегистрироваться
-        </button>
-      </form>
-      <br>
+            <form *ngIf="!submitted" [formGroup]="form" (ngSubmit)="onSubmit()" #signupForm="ngForm">
+                <mat-form-field>
+                    <label>Пользователь: </label>
+                    <input matInput formControlName="username" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <label>Пароль: </label>
+                    <input matInput formControlName="password" required type="password">
+                </mat-form-field>
+                <mat-form-field>
+                    <label>Имя: </label>
+                    <input matInput formControlName="firstname">
+                </mat-form-field>
+                <mat-form-field>
+                    <label>Фамилия: </label>
+                    <input matInput formControlName="lastname">
+                </mat-form-field>
+                <button type="submit" [disabled]="!signupForm.form.valid" mat-raised-button color="primary">
+                    Зарегистрироваться
+                </button>
+            </form>
+            <br>
 
-      <mat-spinner *ngIf="submitted" mode="indeterminate"></mat-spinner>
-      <br>
-      <hr>
+            <mat-spinner *ngIf="submitted" mode="indeterminate"></mat-spinner>
+            <br>
+            <hr>
 
-      <p>
-        <i>Created by
-          <a href="https://github.com/bfwg">Sivodedov Dmitry</a>
-        </i>
-      </p>
-      <p>
-        <i>Click below to go to repository</i>
-      </p>
-      <button (click)="repository()" mat-raised-button color="accent">GitHub Repository</button>
+            <p>
+                <i>Created by
+                    <a href="https://github.com/bfwg">Sivodedov Dmitry</a>
+                </i>
+            </p>
+            <p>
+                <i>Click below to go to repository</i>
+            </p>
+            <button (click)="repository()" mat-raised-button color="accent">GitHub Repository</button>
 
-    </mat-card-content>
+        </mat-card-content>
 
-  </mat-card>
+    </mat-card>
 
 </div>
