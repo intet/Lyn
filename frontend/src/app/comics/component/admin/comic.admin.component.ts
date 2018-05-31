@@ -19,5 +19,9 @@ export class ComicAdminComponent implements OnInit {
     updateUrls() {
         this.comicsService.updateUrls();
     }
+
+    updatePageUrls() {
+        this.comicsService.updatePageUrls();
+    }
 }
 

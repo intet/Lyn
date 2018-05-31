@@ -4,11 +4,18 @@ import com.intetm.comics.model.Comic;
 import com.intetm.comics.model.Page;
 import com.intetm.comics.repository.ComicRepository;
 import com.intetm.comics.repository.PageRepository;
+import org.apache.commons.io.IOUtils;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -38,7 +46,12 @@ public class ComicsPageUrlResolver {
 
 
     public void updatePageUrls() throws Exception {
-        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+        BasicCookieStore cookieStore = new BasicCookieStore();
+        BasicClientCookie cookie = new BasicClientCookie("1", "1");
+        cookie.setDomain("acomics.ru");
+        cookie.setAttribute("ageRestrict", "17");
+        cookieStore.addCookie(cookie);
+        try (CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultCookieStore(cookieStore).build()) {
             List<Comic> list = comicRepository.findAll();
             for (Comic comic : list) {
                 if (comic.expectedCount != comic.pageCount) {
@@ -74,8 +87,24 @@ public class ComicsPageUrlResolver {
             if (Response.Status.OK.getStatusCode() != response.getStatusLine().getStatusCode()) {
                 throw new Exception("Не закончились страницы");
             }
-            return org.apache.commons.io.IOUtils.toString(response.getEntity().getContent(), "UTF-8");
+            String string = IOUtils.toString(response.getEntity().getContent(), "UTF-8");
+
+            if (string.indexOf("mainImage") != -1)
+                return string;
         }
+
+        HttpPost post = new HttpPost(uri);
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("ageRestrict", "17"));
+        post.setEntity(new UrlEncodedFormEntity(params));
+        try (CloseableHttpResponse response = httpClient.execute(post)) {
+            if (Response.Status.OK.getStatusCode() != response.getStatusLine().getStatusCode()) {
+                throw new Exception("Не закончились страницы");
+            }
+            return IOUtils.toString(response.getEntity().getContent(), "UTF-8");
+
+        }
+
     }
 
     private void parsePage(Comic comic, int i, String pageHtml) {

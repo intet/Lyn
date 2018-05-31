@@ -14,4 +14,8 @@ export class ComicsService {
         this.api.post(ComicsService.api_path + '/updateUrls', {}).subscribe();
     }
 
+    updatePageUrls() {
+        this.api.post(ComicsService.api_path + '/updatePageUrls', {}).subscribe();
+    }
+
 }

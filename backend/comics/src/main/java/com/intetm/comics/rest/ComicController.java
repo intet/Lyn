@@ -29,6 +29,12 @@ public class ComicController {
     @PreAuthorize("hasRole('ADMIN')")
     public String updateUrls() throws Exception {
         comicsUrlResolver.updateUrls();
+        return null;
+    }
+
+    @RequestMapping(method = POST, value = "/updatePageUrls")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String updatePageUrls() throws Exception {
         comicsPageUrlResolver.updatePageUrls();
         return null;
     }
