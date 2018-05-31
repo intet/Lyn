@@ -15,7 +15,7 @@ public class Comic {
     @Column(name = "name", nullable = false)
     public String name;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "about", nullable = false)
     public String about;
 
     @Column(name = "url", nullable = false)
