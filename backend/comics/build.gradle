@@ -3,4 +3,6 @@ version '0.1'
 
 dependencies {
     compile project(':backend:storage')
+    compile group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.10'
+
 }

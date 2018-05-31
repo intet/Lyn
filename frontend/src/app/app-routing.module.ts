@@ -11,6 +11,7 @@ import {SignupComponent} from './security/signup';
 import {DictionaryComponent} from "./trainer/component/word/dictionary/dictionary.component";
 import {TestContainerComponent} from "./trainer/component/test/container/test.container.component";
 import {ReaderInputComponent} from "./trainer/component/reader/input/reader.input.component";
+import {ComicAdminComponent} from "./comics/component/admin/comic.admin.component";
 
 export const routes: Routes = [
     {
@@ -55,6 +56,11 @@ export const routes: Routes = [
     {
         path: 'admin',
         component: AdminComponent,
+        canActivate: [AdminGuard]
+    },
+    {
+        path: 'comic',
+        component: ComicAdminComponent,
         canActivate: [AdminGuard]
     },
     {

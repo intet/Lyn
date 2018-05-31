@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>{{isEditMode()?"Изменение слова":"Добавление слова"}}</h1>
-<div class="row">
+<div mat-dialog-content class="row">
     <div class="col-6">
         <mat-card-title>Слово</mat-card-title>
         <list-word #fromComponent [words]=link.from></list-word>

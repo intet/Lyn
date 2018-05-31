@@ -2,10 +2,13 @@
 --changeset Sivodedov Dmitry:create_table_comic
 CREATE TABLE COMIC
 (
-  ID         BIGINT PRIMARY KEY NOT NULL IDENTITY,
-  NAME       VARCHAR(255),
-  URL        VARCHAR(255),
-  PAGE_COUNT INT
+  ID             BIGINT PRIMARY KEY NOT NULL IDENTITY,
+  NAME           VARCHAR(255)       NOT NULL,
+  ABOUT          VARCHAR(1024)      NOT NULL,
+  URL            VARCHAR(255)       NOT NULL,
+  IMG_URL        VARCHAR(255)       NOT NULL,
+  EXPECTED_COUNT INT,
+  PAGE_COUNT     INT
 );
 --rollback drop table comic;
 

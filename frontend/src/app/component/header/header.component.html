@@ -10,6 +10,10 @@
         <span>Словарь</span>
     </button>
 
+    <button *ngIf="hasAdminRole()" mat-button routerLink="/comic">
+        <span>Комиксы</span>
+    </button>
+
 
     <div class="right">
         <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="flex-end center">

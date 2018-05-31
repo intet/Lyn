@@ -12,14 +12,23 @@ public class Comic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     public String name;
 
-    @Column(name = "url")
+    @Column(name = "name", nullable = false)
+    public String about;
+
+    @Column(name = "url", nullable = false)
     public String url;
 
-    @Column(name = "page_count")
+    @Column(name = "img_url", nullable = false)
+    public String imgUrl;
+
+    @Column(name = "page_count", nullable = false)
     public int pageCount;
+
+    @Column(name = "expected_count", nullable = false)
+    public int expectedCount;
 
     @OneToMany(mappedBy = "comic")
     public List<Page> pages;

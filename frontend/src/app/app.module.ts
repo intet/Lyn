@@ -11,27 +11,30 @@ import {TrainerModuleModule} from "./trainer/trainer.module";
 import {UtilModule} from "./shared/util/util.module";
 import {getRussianPaginatorIntl} from "./shared/util/russian-paginator-intl";
 import {AppRoutingModule} from "./app-routing.module";
+import {ComicModule} from "./comics/comic.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    ApiCardComponent,
-    HomeComponent,
-    AccountMenuComponent,
-    AdminComponent
-  ],
-  imports: [
-    UtilModule,
-    SecurityModule,
-    TrainerModuleModule,
-    AppRoutingModule,
-  ],
-  providers: [
-    MatIconRegistry,
-    {provide: MatPaginatorIntl, useValue: getRussianPaginatorIntl()}
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        ApiCardComponent,
+        HomeComponent,
+        AccountMenuComponent,
+        AdminComponent
+    ],
+    imports: [
+        UtilModule,
+        SecurityModule,
+        TrainerModuleModule,
+        AppRoutingModule,
+        ComicModule
+    ],
+    providers: [
+        MatIconRegistry,
+        {provide: MatPaginatorIntl, useValue: getRussianPaginatorIntl()}
 
-  ],
-  bootstrap: [AppComponent]
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
