@@ -1,5 +1,6 @@
 package com.intetm.comics.rest;
 
+import com.intetm.comics.resolver.ComicsPageUrlResolver;
 import com.intetm.comics.resolver.ComicsUrlResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +22,15 @@ public class ComicController {
     private static final Logger LOG = LoggerFactory.getLogger(ComicController.class);
     @Autowired
     private ComicsUrlResolver comicsUrlResolver;
+    @Autowired
+    private ComicsPageUrlResolver comicsPageUrlResolver;
 
     @RequestMapping(method = POST, value = "/updateUrls")
     @PreAuthorize("hasRole('ADMIN')")
     public String updateUrls() throws Exception {
-        return comicsUrlResolver.updateUrls();
+        //   comicsUrlResolver.updateUrls();
+        comicsPageUrlResolver.updatePageUrls();
+        return null;
     }
 
 }

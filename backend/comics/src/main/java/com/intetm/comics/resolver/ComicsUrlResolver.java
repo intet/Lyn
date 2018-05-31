@@ -3,34 +3,39 @@ package com.intetm.comics.resolver;
 import com.intetm.comics.model.Comic;
 import com.intetm.comics.repository.ComicRepository;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.Random;
 
 
 @Service
 public class ComicsUrlResolver {
 
 
-    public static final String URL = "https://acomics.ru/comics?categories=&ratings%5B%5D=1&ratings%5B%5D=2&ratings%5B%5D=3&ratings%5B%5D=4&ratings%5B%5D=5&ratings%5B%5D=6&type=0&updatable=0&subscribe=0&issue_count=2&sort=last_update";
+    public static final String URL = "https://acomics.ru/comics?categories=&ratings{}5B{}5D=1&ratings{}5B{}5D=2&ratings{}5B{}5D=3&ratings{}5B{}5D=4&ratings{}5B{}5D=5&ratings{}5B{}5D=6&type=0&updatable=0&subscribe=0&issue_count=2&sort=last_update";
     public static final int MAX_DEPTH = 1500;
     public static final int PAGE_SIZE = 10;
+
+    Logger LOG = LoggerFactory.getLogger(ComicsUrlResolver.class);
 
     @Autowired
     ComicRepository comicRepository;
 
     public String updateUrls() throws Exception {
-        updateAll();
+        updateAllComic();
         return null;
     }
 
-    public String updateAll() throws Exception {
+    public String updateAllComic() throws Exception {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             loadAllComics(httpClient);
         }
@@ -39,6 +44,8 @@ public class ComicsUrlResolver {
 
     private void loadAllComics(CloseableHttpClient httpClient) throws Exception {
         for (int i = 0; (i * PAGE_SIZE) < MAX_DEPTH; i++) {
+            LOG.info("Загружаем комиксы с {} по {}", i * PAGE_SIZE, (i + 1) * PAGE_SIZE);
+
             String content = loadPage(httpClient, i);
             while (content.indexOf("catalog-elem list-loadable") != -1) {
                 content = content.substring(content.indexOf("<table class=\"catalog-elem list-loadable\">"));
@@ -48,6 +55,11 @@ public class ComicsUrlResolver {
                 comicRepository.save(comic);
                 content = content.substring(finishIndex);
             }
+            if (i % 10 == 0) {
+                int time = 2 + (new Random().nextInt() % 5);
+                LOG.info("Спим {} секунд", time);
+                Thread.sleep(time);
+            }
         }
     }
 
@@ -56,12 +68,13 @@ public class ComicsUrlResolver {
         URI uri = new URIBuilder(URL)
                 .addParameter("skip", Integer.toString(pageIndex * 10))
                 .build();
-        HttpPost put = new HttpPost(uri);
-        CloseableHttpResponse response = httpClient.execute(put);
-        if (Response.Status.OK.getStatusCode() != response.getStatusLine().getStatusCode()) {
-            throw new Exception("Не ожиданно закончились комиксы");
+        HttpGet get = new HttpGet(uri);
+        try (CloseableHttpResponse response = httpClient.execute(get)) {
+            if (Response.Status.OK.getStatusCode() != response.getStatusLine().getStatusCode()) {
+                throw new Exception("Не ожиданно закончились комиксы");
+            }
+            return org.apache.commons.io.IOUtils.toString(response.getEntity().getContent(), "UTF-8");
         }
-        return org.apache.commons.io.IOUtils.toString(response.getEntity().getContent(), "UTF-8");
     }
 
     private Comic parsePage(String comicPage) {
@@ -88,7 +101,7 @@ public class ComicsUrlResolver {
         comic.about = about;
         comic.url = url;
         comic.imgUrl = imgUrl;
-        comic.expectedCount = Integer.getInteger(expectedCount);
+        comic.expectedCount = Integer.valueOf(expectedCount);
         return comic;
     }
 

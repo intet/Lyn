@@ -30,7 +30,7 @@ public class Comic {
     @Column(name = "expected_count", nullable = false)
     public int expectedCount;
 
-    @OneToMany(mappedBy = "comic")
+    @OneToMany(mappedBy = "comic", fetch = FetchType.LAZY)
     public List<Page> pages;
 
     public Comic() {
