@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 @Service
@@ -56,7 +56,7 @@ public class ComicsPageUrlResolver {
                 parsePage(comic, i, pageHtml);
 
                 if (i % 50 == 0) {
-                    int time = 2 + (new Random().nextInt() % 5);
+                    int time = ThreadLocalRandom.current().nextInt(2, 8);
                     LOG.info("Загружено {} страниц комикса {}. Спим {} секунд", i, comic.name, time);
                     Thread.sleep(time);
                 }

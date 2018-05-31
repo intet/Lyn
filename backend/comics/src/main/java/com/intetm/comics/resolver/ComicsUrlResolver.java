@@ -14,14 +14,14 @@ import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.Response;
 import java.net.URI;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 @Service
 public class ComicsUrlResolver {
 
 
-    public static final String URL = "https://acomics.ru/comics?categories=&ratings{}5B{}5D=1&ratings{}5B{}5D=2&ratings{}5B{}5D=3&ratings{}5B{}5D=4&ratings{}5B{}5D=5&ratings{}5B{}5D=6&type=0&updatable=0&subscribe=0&issue_count=2&sort=last_update";
+    public static final String URL = "https://acomics.ru/comics?categories=&ratings%5B%5D=1&ratings%5B%5D=2&ratings%5B%5D=3&ratings%5B%5D=4&ratings%5B%5D=5&ratings%5B%5D=6&type=0&updatable=0&subscribe=0&issue_count=2&sort=last_update";
     public static final int MAX_DEPTH = 1500;
     public static final int PAGE_SIZE = 10;
 
@@ -56,9 +56,9 @@ public class ComicsUrlResolver {
                 content = content.substring(finishIndex);
             }
             if (i % 10 == 0) {
-                int time = 2 + (new Random().nextInt() % 5);
+                int time = ThreadLocalRandom.current().nextInt(2, 8);
                 LOG.info("Спим {} секунд", time);
-                Thread.sleep(time);
+                Thread.sleep(time * 1000);
             }
         }
     }
