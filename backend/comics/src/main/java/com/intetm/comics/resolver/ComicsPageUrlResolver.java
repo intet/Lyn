@@ -119,7 +119,7 @@ public class ComicsPageUrlResolver {
             page.index = i;
             page.comic = comic;
         }
-        page.url = imgUrl;
+        page.url = "acomics.ru" + imgUrl;
         pageRepository.save(page);
     }
 

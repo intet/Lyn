@@ -99,8 +99,8 @@ public class ComicsUrlResolver {
             comic.pageCount = 0;
         }
         comic.about = about;
-        comic.url = url;
-        comic.imgUrl = imgUrl;
+        comic.url = "acomics.ru" + url;
+        comic.imgUrl = "acomics.ru" + imgUrl;
         comic.expectedCount = Integer.valueOf(expectedCount);
         return comic;
     }
