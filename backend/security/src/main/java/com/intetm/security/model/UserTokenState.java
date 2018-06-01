@@ -1,8 +1,5 @@
 package com.intetm.security.model;
 
-/**
- * Created by fan.jin on 2016-10-17.
- */
 public class UserTokenState {
     private String access_token;
     private Long expires_in;

@@ -1,9 +1,5 @@
 package com.intetm.security.auth;
 
-/**
- * Created by fan.jin on 2016-11-07.
- */
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intetm.model.User;
 import com.intetm.security.TokenHelper;

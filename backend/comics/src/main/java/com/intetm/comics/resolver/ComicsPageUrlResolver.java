@@ -49,7 +49,7 @@ public class ComicsPageUrlResolver {
         BasicCookieStore cookieStore = new BasicCookieStore();
         BasicClientCookie cookie = new BasicClientCookie("1", "1");
         cookie.setDomain("acomics.ru");
-        cookie.setAttribute("ageRestrict", "17");
+        cookie.setAttribute("ageRestrict", "18");
         cookieStore.addCookie(cookie);
         try (CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultCookieStore(cookieStore).build()) {
             List<Comic> list = comicRepository.findAll();
@@ -95,7 +95,7 @@ public class ComicsPageUrlResolver {
 
         HttpPost post = new HttpPost(uri);
         List<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("ageRestrict", "17"));
+        params.add(new BasicNameValuePair("ageRestrict", "18"));
         post.setEntity(new UrlEncodedFormEntity(params));
         try (CloseableHttpResponse response = httpClient.execute(post)) {
             if (Response.Status.OK.getStatusCode() != response.getStatusLine().getStatusCode()) {

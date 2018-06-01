@@ -1,5 +1,7 @@
 package com.intetm.comics.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import java.util.List;
 @Table(name = "comic")
 public class Comic {
 
+    @JsonIgnore
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +30,11 @@ public class Comic {
     @Column(name = "page_count", nullable = false)
     public int pageCount;
 
+    @JsonIgnore
     @Column(name = "expected_count", nullable = false)
     public int expectedCount;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "comic", fetch = FetchType.LAZY)
     public List<Page> pages;
 

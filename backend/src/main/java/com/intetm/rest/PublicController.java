@@ -9,10 +9,6 @@ import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-/**
- * Created by fan.jin on 2017-05-08.
- */
-
 @RestController
 @RequestMapping( value = "/api", produces = MediaType.APPLICATION_JSON_VALUE )
 public class PublicController {

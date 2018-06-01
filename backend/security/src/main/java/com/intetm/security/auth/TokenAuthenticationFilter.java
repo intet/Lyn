@@ -22,9 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by fan.jin on 2016-10-19.
- */
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     private final Log logger = LogFactory.getLog(this.getClass());

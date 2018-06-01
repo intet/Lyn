@@ -33,10 +33,6 @@ import java.util.Objects;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-/**
- * Created by fan.jin on 2016-10-15.
- */
-
 @RestController
 @RequestMapping(value = "/api/trainer", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public class TrainerController {

@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-/**
- * Created by fan.jin on 2016-10-15.
- */
-
 @RestController
 @RequestMapping(value = "/api/comics", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public class ComicController {
