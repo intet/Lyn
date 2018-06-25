@@ -1,0 +1,14 @@
+[Unit]
+Description=Spring boot app
+After=syslog.target network.target
+
+[Service]
+User=root
+WorkingDirectory=/u01/database
+ExecStart=/bin/bash -c "./gradlew startDatabase"
+ExecStop=/bin/bash -c "./gradlew stopDatabase"
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

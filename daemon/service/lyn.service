@@ -1,0 +1,12 @@
+[Unit]
+Description=Spring boot app
+After=syslog.target network.target database.service
+
+[Service]
+User=root
+WorkingDirectory=/u01/lyn
+ExecStart=/bin/bash -c "java -jar /u01/lyn/backend.jar"
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
